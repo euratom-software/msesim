@@ -1,0 +1,173 @@
+<stark_settings description="Input parameters for the IDL STARK code. Corresponds with shot 19902">
+	<equi description="Contains data relevant to the equilibrium.">
+		<R0
+		  description="Major radius of the centre of the plasma"
+		  unit="m"
+		  type="float"
+		  value="0.80"/>
+		<a
+		  description="Minor radius of the plasma in the midplane"
+		  unit="m"
+		  type="float"
+		  value="0.63"/>
+
+		<file
+                  description="Name of the file that contains the results of the equilibrium code (normalised flux coordinates psi, magnetic field vector). If the filename is set to 'none' than the build-in equilibrium model is used. (equi_18501_t0.29.xdr)"
+                  type="string"
+		  value="equi_19902_t0.200.xdr"/>
+
+		<Bphi
+		  description="Toroidal magnetic field in vacuum at R0 (only used if the equilibrium file is set to 'none')."
+		  unit="T"
+		  type="float"
+		  value="-0.5"/>
+		<q0
+		  description="q at the magnetic axis (only used if the equilibrium file is set to 'none')."
+		  type="float"
+		  value="1.0"/>
+		<qa
+		  description="q at the plasma edge (only used if the equilibrium file is set to 'none')."
+		  type="float"
+		  value="3.0"/>
+		<qidx
+		  description="q-index: q(psi) = q0 + (qa-q0)*sqrt(psi)^qidx, where psi is the normalised flux coordinate (only used if the equilibrium file is set to 'none')"
+		  type="float"
+		  value="3.0"/>
+		<Bpar0
+		  description="Paramagnetic field at the magnetic axis (if negative this becomes a diamagnetic field). (only used if the equilibrium file is set to 'none')."
+		  unit="T"
+		  type="float"
+		  value="0.0"/>
+		<Bpara
+		  description="Paramagnetic field at the plasma edge (if negative this becomes a diamagnetic field). (only used if the equilibrium file is set to 'none')."
+		  unit="T"
+		  type="float"
+		  value="0.0"/>
+		<Bparidx
+		  description="Paramagnetic field-index: Bpar(psi) = Bpar0 + (Bpara-Bpar0)*sqrt(psi)^Bparidx, where psi is the normalised flux coordinate (only used if the equilibrium file is set to 'none')."
+		  unit="T"
+		  type="float"
+		  value="2.0"/>
+		<shafr
+		  description="Shafranov shift of the magnetic axis (only used if the equilibrium file is set to 'none')"
+		  unit="m"
+		  type="float"
+		  value="0.1"/>
+		<elong
+		  description="Elongation of the plasma (only used if the equilibrium file is set to 'none')"
+		  type="float"
+		  value="2.2"/>
+	</equi>
+	
+	<beam description="Contains data relevant to the Neutral Beam.">	
+		<fixedsettings
+		  description="The xml-filename that contains beam settings that are unlikely to change often (e.g. position beam duct, beam source layout, ...)."
+		  type="string"
+		  value="SouthNBI_fixedsettings.xml"/>
+		<file
+                  description="Name of the file that contains the results (beam density, electron density and emission) of M. Turnyanskiy's beam code. The file format should be the standard IDL xdr-format. If the filename is set to 'none' than the build-in beam model is used. (beam_bes_PINI_S_18501_t0.29s_63keV.xdr)"
+		  type="string"
+                  value="beam_bes_PINI_S_18501_t0.29s_63keV.xdr"/>
+                <V
+		  description="Beam voltage."
+		  unit="kV"
+		  type="float"
+		  value="65.0"/>
+		<Bdens0
+		  description="Density of neutral beam particles at the plasma edge  (only used if the beam file is set to 'none')."
+		  unit="m^(-3)"
+		  type="float"
+		  value="5e15"/>
+		<edens0
+		  description="Electron density at the magnetic axis (only used if the beam file is set to 'none')."
+		  unit="m^(-3)"
+		  type="float"
+		  value="5e19"/>
+        </beam>
+
+	<spectrum description="Data relevant to the STARK spectrum">
+		<trans
+		  description="Type of transition (1=H-alpha, 2=H-beta, 3=H-gamma)"
+		  type="integer"
+		  value="1"/>
+		<atomdata
+		  description="Name of the file containing the atomic data."
+		  type="string"
+		  value="stark_atomdata_1e19m3.dat"/>
+		
+		<resfrac
+		  description="The fraction of the emission intensity that is used to determine the spatial resolution (e.g. 0.7 means that the spatial width of channel is determined by the area that emits 70% of the intensity)."
+		  type="float"
+		  value="0.8"/>
+		
+		<Erfile
+		  description="Name of the file containing the radial electric field data. If the filename is set to 'none' than the build-in Er-field model is used."
+		  type="string"
+		  value="none"/>
+		<Ermax
+		  description="The maximum value of the radial electric field. It is assumed this maximum is located at half radius (psi=0.5), and that the Er-field is zero at the magnetic axis (psi=0) and at the plasma edge (psi=1). (only used if the radial electric field file is set to 'none')."
+		  unit="V/m"
+		  type="float"
+		  value="0.0"/>
+		<Eridx
+		  description="Defines the shape of the the radial electric field profile: Er(psi) = Ermax*(1 - (2*abs(0.5-sqrt(psi)))^Eridx). (only used if the radial electric field file is set to 'none')."
+		  type="float" 
+		  value="2.0"/>
+	</spectrum>
+
+	<coll description="Data relevant to the Collection optics">
+		<file
+		  description="The xml-filename that contains the parameters describing the collection optics (e.g. position collection lens, effective focal length, layout of the fibre bundles, ...)."
+		  type="string"
+		  value="coll_param_09072008.xml"/>
+	</coll>
+
+	<integration description="Settings for the numerical integration">
+		<bundles
+		  description="List of the fibre bundles for which you want to calculate the spectrum. This is a string array, with the fibre bundle IDs as defined int he collection optics settings. For MAST this is e.g.'MD143, MD166, MD172'. If you specify a non-existing channel, it will just be ignored (and a warning is printed). If you specify '-1' then spectra for all fibre bundles will be calculated."
+		  type="string"
+		  value="MD160,MD168"/>
+		<nslice
+		  description="Number of slices in which the viewing cylindre of one fibre is divided." 
+		  type="integer" 
+		  value="20"/>
+		<an_C
+		  description="Number of annuli, when integrating over the collection lens." 
+		  type="integer" 
+		  value="4"/>
+		<seg_C
+		  description="Increment of the number segments in each collection lens annulus." 
+		  type="integer" 
+		  value="5"/>
+		
+		<nhor_pini
+		  description="Number of horizontal beamlets taken into account, when integrating over the divergence." 
+		  type="integer" 
+		  value="7"/>
+		<nvert_pini
+		  description="Number of verrtical beamlets taken into account, when integrating over the divergence." 
+		  type="integer" 
+		  value="9"/>
+
+		<dlambda
+		  description="Size of one wavelength bin (wavelength resolution)"
+		  unit="Angstrom"
+		  type="float"
+		  value="0.05"/>
+		<lambdatol
+		  description="Wavelength tolerance. Set the number of Angstrom that the wavelength vector is extended above and below the minimum and maximum wavelength shift."
+		  unit="Angstrom"
+		  type="float"
+		  value="7.0"/>
+
+		<npsi
+		  description="Number of psi bins (psi = normalised flux coordinate). This is needed to calculata intensity as function of psi. More bins = more resolution but also more noise." 
+		  type="integer" 
+		  value="200"/>
+		<only_intensity
+		  description="If set to 1 the integration over the beam voltage modulation, the divergence an the collection lens is skipped and only the intensity as function of psi is returned. Is faster when you're only interested in the spatial resolution." 
+		  type="byte" 
+		  value="0"/>
+	</integration>
+
+</stark_settings>

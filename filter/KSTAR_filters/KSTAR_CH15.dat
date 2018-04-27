@@ -1,0 +1,13 @@
+; ******************
+; * Filter mapping *
+; ******************
+;
+; Links filter partno. to channel.
+;
+; The first row contains the channel numbers (i.e. the actual optical fibres)
+; The second row contains the filterholder numbers (usually same number, only here for info. Not used in the code).
+; The third row contains the filter identification number
+;
+    15
+    15
+     1

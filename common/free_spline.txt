@@ -1,0 +1,74 @@
+
+
+
+Step 1 For i = 0,1,,n-1 set 
+
+
+
+hi = xi+1 - xi. 
+
+
+Step 2 For i = 1,2,,n-1 set 
+
+
+
+yi = (3/hi )(ai+1 - ai) - (3/hi-1)(ai -ai-1). 
+
+
+
+(Steps 3-5 and part of Step 6 solve a tridiagonal linear system using the method described in Algorithm 6.7) 
+
+
+
+Step 3 Set l0 = 1; 
+
+u0 = 0; 
+
+z0 = 0; 
+
+
+
+Step 4 For i = 1,2,,n-1 set 
+
+
+li = 2(xi+1 - xi-1) - hi-1ui-1; 
+
+ui = hi/li 
+
+zi = (yi - hi-1 zi-1)/li. 
+
+
+
+Step 5 Set ln = 1; 
+
+zn = 0; 
+
+cn = 0; 
+
+
+
+Step 6 For i = n-1,n-2,,0 set 
+
+
+ci = zi - ui ci+1; 
+
+bi = (ai+1 - ai)/hi - hi(ci+1 +2 ci)/3; 
+
+di = (ci+1 - ci)/(3hi); 
+
+
+
+Step 7 OUTPUT (ai , bi , ci , di for i = 0,1,,n-1) 
+
+STOP. 
+
+
+
+
+
+
+
+Theorem 3.12 (p148) 
+
+
+

@@ -1,0 +1,115 @@
+<stark_settings description="Settings for plotting STARK data">
+	<general description="General plot settings">
+		<plot_print
+		  description="If set to 1 the results will be plotted in several windows. If set to 2 the results will be printed to several postscript files in the subdirectory 'pictures'. If set to 0 there will be no plotting or printing." 
+		  type="byte" 
+		  value="2"/>
+	</general>
+
+	<geom description="Settings for plotting the 3D geometry of the MSE system.">
+		<geomplot
+		  description="If set to 1 a 3D box is plotted in which the geometry of the MSE system is plotted (i.e. the integration points, the outline of the neutral beam, the magnetic field vectors, ... ). If one of the 'compare' methods is used, then geomplot is ignored." 
+		  type="byte" 
+		  value="1"/>
+		<zoom
+		  description="Zoom of the 3D box. Only relevant if geomplot=1." 
+		  type="float" 
+		  value="1.4"/>
+		<centre
+		  description="xyz-coordinate of the 3D box centre. Only relevant if geomplot=1." 
+		  type="float" 
+		  value="0.8, -0.8, 0.0"/>
+		<rotation
+		  description="Rotation of the 3D box around the z-axis and around the (rotatated) x-axis (in degrees). Only relevant if geomplot=1." 
+		  unit="degrees" 
+		  type="float" 
+		  value="45, 20"/>
+
+		<beamplot
+		  description="If set to 1 a wireframe of a cylindre with radius 'w' (see in section 'beam') is plotted to indicate the position and width of the neutral beam. Only relevant if geomplot=1." 
+		  type="byte" 
+		  value="1"/>
+		<gpplot
+		  description="If set to 1 the integration points (grid points) are indicated by a '+', with a different color for each channel. Only relevant if geomplot=1." 
+		  type="byte" 
+		  value="1"/>
+		<Bfldplot
+		  description="If set to 1 the B-field vector in each grid point is plotted. Only relevant if geomplot=1." 
+		  type="byte" 
+		  value="0"/>
+		<velplot
+		  description="If set to 1 the beam velocity vector in each grid point is plotted. Only relevant if geomplot=1." 
+		  type="byte" 
+		  value="0"/>
+		<Efldplot
+		  description="If set to 1 the E-field in each grid point is plotted. Only relevant if geomplot=1." 
+		  type="byte" 
+		  value="0"/>
+		<emisplot
+		  description="If set to 1 the intensity of the emission in each grid point is plotted: each grid point is indicated by a '+', the color of varies from blue for min(emission) to red for max(emission). Only relevant if geomplot=1." 
+		  type="byte" 
+		  value="0"/>
+	</geom>
+	
+	<emisres description="Settings for plotting the emission intensity and the spatial resolution">
+		<emisRZplot
+		  description="If set to 1 the intensity of the emission is plotted in the (R,Z)-plane. The intensity is normalised for each channel, going from blue for min(emission) to red for max(emission). 10 flux surfaces, from psi=0 to psi=1 are overlayed.  If one of the 'compare' methods is used, then emisRZplot is ignored."
+		  type="byte" 
+		  value="1"/>
+		<emisPsiRplot
+		   description="If set to 1 the intensity of the emission is plotted, (a) as a function of normalised flux coordinate, (b) as a function of major radius. If the 'Ncompare' method is used, then emisPsiRplot is ignored."
+		   type="byte" 
+		   value="1"/>
+		<temisplot
+		  description="If set to 1 the total emission intensity for each channel is plotted, (a) as a fuction of normalised flux coordinate, (b) as a function of major radius."
+		  type="byte" 
+		  value="1"/>
+		<resplot
+		  description="If set to 1 the spatial resolution for each channel is plotted, (a) as a fuction of normalised flux coordinate, (b) as a function of major radius."
+		  type="byte" 
+		  value="1"/>
+	</emisres>
+
+	<spec description="Settings for plotting the spectra">
+		<multiplot
+		  description="If set to 1, the spectrum, pol. angle and pol. fraction for one channel are plot, below eachother, on one window/page. With a new window/page for each channel. If set to 0 a new window/page is used for every plot." 
+		  type="byte"
+		  value="1"/>
+		<spectrum
+		  description="Plots the spectra and their components (pol. pi, unpol. pi, pol. sigma, unpol. sigma)." 
+		  type="byte" 
+		  value="1"/>
+		<polangle
+		  description="Plots the polarisation angle as a function of wavelength." 
+		  type="byte" 
+		  value="1"/>
+		<polfrac
+		  description="Plots the polarisation fraction/norm. SN-ratio as a function of wavelength." 
+		  type="byte" 
+		  value="1"/>
+	</spec>
+
+	<profile description="Settings for plotting profiles">
+		<multiplot
+                  description="If set to 1, the intensity, pol. angle and pol. fraction at the CWL for all channels are plotted, below eachother, on one window/page. If set to 0 a separate window/page is used for intensity, po. angle and pol. fraction." 
+		  type="byte"
+		  value="1"/>
+		<intensity
+		  description="Plots the intensity at the CWL as a function of channel R." 
+		  type="byte" 
+		  value="1"/>
+		<polangle
+		  description="Plots the polarisation angle as a function of channel R." 
+		  type="byte" 
+		  value="1"/>
+		<polfrac
+		  description="Plots the polarisation fraction/norm. SN-ratio as a function of channel R." 
+		  type="byte" 
+		  value="1"/>
+		<wavelength
+		  description="Plots the central and optimal pi-red, pi-blue and sigma wavelengths as a function of channel R." 
+		  type="byte" 
+		  value="1"/>
+	</profile>
+
+</stark_settings>

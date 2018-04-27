@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<physics description="Physical constants">
+	<c 
+	  description="Speed of light"
+	  unit="m/s"
+	  type="double"
+	  value="2.99793e8"/>
+	<kb
+	  description="Boltzmann constant"
+	  unit="J/K"
+	  type="double"
+	  value="1.38e-23"/>
+	<em
+	  description="Electron mass"
+	  unit="kg"
+	  type="double"
+	  value="9.1091e-31"/>
+	<e
+	  description="Electron charge"
+	  unit="C"
+	  type="double"
+	  value="1.602e-19"/>
+	<pm
+	  description="Proton mass"
+	  unit="kg"
+	  type="double"
+	  value="1.6725e-27"/>
+	<nm
+	  description="Neutron mass"
+	  unit="kg"
+	  type="double"
+	  value="1.6748e-27"/>
+	<u
+	  description="Atomic mass unit"
+	  unit="kg"
+	  type="double"
+	  value="1.661e-27"/>
+	<RydInf
+	  description="Infinity Rydberg constant"
+	  unit="1/m"
+	  type="double"
+	  value="1.097373e7"/>
+	<nAir
+	  description="Refractive index of air @STP"
+	  type="double"
+	  value="1.0002926"/>
+	<h
+	  description="Planck constant"
+	  unit="J.s"
+	  type="double"
+	  value="6.62607e-34"/>
+	<mu0
+	  description="Magnetic permeability of the vacuum"
+	  unit="(V.s)/(A.m)"
+	  type="double"
+	  value="1.2566370614e-6"/>
+	<eps0
+	  description="Electric permittivity of the vacuum"
+	  unit="(A^2.s^4)/(kg.m^3)"
+	  type="double"
+	  value="8.854187817620e-12"/>
+</physics>

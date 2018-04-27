@@ -1,0 +1,16 @@
+; ******************
+; * Filter mapping *
+; ******************
+;
+; Links filter partno. to fibre bundle number (via filterscope no.).
+;
+; The first row contains the fibre bundel numbers (without the 'MD' so just 142 to 181 in the case of MAST)
+; The second row contains the filterscope/MSE channel no. to which the fibre bundle is connected
+; (from 0 to 41, -1 if the fibre bundle is not connected. This is for completeness only : this info is not used in the simulation code)
+; The third row contains the filter partnumbers in those filterscopes (again -1 if no filter is installed)
+;
+; This mapping corresponds with that of shot range 19896 - 20055 and a beam voltage of 55kV
+;
+    142      143      144      145      146      147      148      149      150      151      152      153      154      155      156      157      158      159      160      161      162      163      164      165      166      167      168      169      170      171      172      173      174      175      176      177      178      179      180      181
+      8        9       10       11       13       15       16       17       -1       18       20       21       -1       22       23       24       25       26       27       28       29       30       31       -1       32       33       34       35       -1       36       37       38       39       40       41       -1       -1       -1       -1       -1
+ 660597       -1       -1       -1       -1     6603       -1   660234       -1   660194       -1   660057       -1   660016   659974   659916        -1  659830   659783       -1   659682       -1     6596       -1   659545       -1   659437   659390       -1   659342     6593       -1       -1   659153       -1       -1       -1       -1       -1       -1

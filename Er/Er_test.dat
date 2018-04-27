@@ -1,0 +1,27 @@
+; The radial, electrostatic field given as a function of major radius
+; in V/m. Outwards pointing fields are positive, inwards are negative.
+; If the major radius R is smaller than the magnetic axis, the sign
+; should NOT change!!! (i.e. left and right of the magnetic axis are
+; symmetric)
+;
+;  R [m]      Er [V/m]
+    0.90      3.00E+02
+    0.93      5.70E+03
+    0.96      1.02E+04
+    0.99      1.36E+04
+    1.03      1.61E+04
+    1.06      1.79E+04
+    1.09      1.90E+04
+    1.12      1.96E+04
+    1.15      1.92E+04
+    1.18      1.80E+04
+    1.22      1.43E+04
+    1.25      8.60E+03
+    1.28     -2.50E+03
+    1.31     -4.40E+03
+    1.34     -3.80E+03
+    1.37     -1.90E+03
+    1.41     -8.00E+02
+    1.44     -4.00E+02
+    1.47     -1.00E+01
+    1.50      0.00E+00

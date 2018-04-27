@@ -1,0 +1,67 @@
+;-----------------------------------------------------------------------------------------------------------------------------
+; H-alpha, -beta and -gamma Stark spectrum data  (at electron density 5e20m^{-3} from M.F. Gu, J. Phys. B 41 (2008) pp.095701)
+;-----------------------------------------------------------------------------------------------------------------------------
+; How this file should be set up:
+;   1. all comment lines start with ';'
+;   2. each block of data has following structure:
+;      - first integer 'trans' indicating the type of transition
+;      - second integer 'npi' indicating the number of pi-lines
+;      - 4 x npi floating point values (lin., quad. and cubic freq. shift and intensity of each pi-line)
+;      - third integer 'nsigma' indicating the number of sigma-lines
+;      - 4 x nsigma floating point values (lin., quad. and cubic freq. shift and intensity of each sigma-line)
+; WARNING: Most papers only show 5 relative intensities: sigma0, sigma1, pi2, pi3 and p4!
+;          The intensities in the last column in this file correspond with:
+;           pi2, pi3 and pi4 for pi       AND      sigma0/4, sigma0/4, sigma1 !
+;
+; Transition (1=H-alpha,2=H-beta,3=H-gamma):
+  1
+; number of (non-zero) pi-lines:
+  3
+; lin. freq. shift	quad. freq. shift	cubic freq. shift	intensity
+  128.78		6.715			0.003			0.0391486
+  193.17		6.207			0.088			0.1234710
+  257.56		6.309			0.164			0.0919638
+; number of (non-zero) sigma-lines:
+  3
+; lin. freq. shift	quad. freq. shift	cubic freq. shift	intensity
+  0.00			5.177			0.000			0.0701992
+  0.00			6.705			0.000			0.0701992
+  64.39			6.156			0.085			0.1050180
+;
+;----------------------------------------------------------------------------------
+; Transition (1=H-alpha,2=H-beta,3=H-gamma):
+  2
+; number of (non-zero) pi-lines: 
+  3
+; lin. freq. shift	quad. freq. shift	cubic freq. shift	intensity
+  386.34		38.360			1.045			7.0
+  515.12		35.970			2.125			31.5
+  643.90		35.100			3.065			29.5
+; number of (non-zero) sigma-lines: 
+  4
+; lin. freq. shift	quad. freq. shift	cubic freq. shift	intensity
+  128.78		37.54			0.003			5.2
+  257.56		33.53			1.155			18.6
+  257.56		38.41			1.042			18.6
+  386.34		35.92			2.125			24.0
+;
+;----------------------------------------------------------------------------------
+; Transition (1=H-alpha,2=H-beta,3=H-gamma):
+  3
+; number of (non-zero) pi-lines: 
+  5
+; lin. freq. shift	quad. freq. shift	cubic freq. shift	intensity
+  128.78		146.3			0.003			4.5
+  321.95		142.2			7.650			4.5
+  772.68		142.5			14.92			4.0
+  965.85		134.2			22.64			27.9
+  1159.02		130.5			29.30			31.9
+; number of (non-zero) sigma-lines: 
+  6
+; lin. freq. shift	quad. freq. shift	cubic freq. shift	intensity
+  0.00			134.1			0.000			8.5
+  0.00			146.3			0.000			8.5
+  193.17		142.2			7.65			11.0
+  643.90		130.5			16.0			10.6
+  643.90		142.5			14.93			10.6
+  837.07		134.3			22.64			20.0

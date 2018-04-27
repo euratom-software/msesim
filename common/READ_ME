@@ -1,0 +1,34 @@
+
+This folder contains the plott widget program for plotting, zooming, panning, saving 1D and 2D data.
+It also contains the underlying cw_draw2d.pro widget that you can use in your own widget programs.
+Each routine has an extensive header explaining how they work.
+
+files in the main directory (alphabetically):
+
+* cp_shaded.pro       : routine generates a shaded (or not shaded) contour plot, with (or without) colorbar.
+                        it has evolved from the cp_shade.pro routine by R. Martin
+* cp_surf.pro         : routine generates a shaded (or not shaded) surface plot, with (or without) contours and/or colorbar.
+                        it has evolved from the cp_shade.pro routine by R. Martin
+* cw_draw2d.pro       : widget that allow you to show 2D or 1D data as profiles, time traces, contour or surface plot (in
+                        different colour schemes). it allows zooming (middle button drag), panning (left button drag),
+                        selecting (left button click), resetting (right button click) and  saving to .eps and .png.
+                        you can also add errorbars, overplot data and add an extra legend.
+                        this widget uses TeXtoIDL so the TeXtoIDL routines should be in your path
+* legend.pro          : routine to add a legend to an IDL plot
+* plott.pro           : program that uses the cw_draw2d widget (and therefore has all its functionality). It is
+                        meant to be similar to the standard plot command in IDL. e.g.
+                          IDL> plott, x, y, error=dy, errstyle=1, col='ff'x, thick=2
+                             => 1D plot of y(x) with normal errorbars in red, thickness 2
+                          IDL> plott, x, y, z, error=dz, errstyle=0, ptype=2
+                             => 2D plot of z(x,y). It will open the plot window as a contour plot (ptype=2)
+                                but the selector at the left top of the plot window allows you to change this
+                                to a 1D z(x, fixed y) plot (ptype=0), a 1D z(y, fixed x) plot (ptype=1) or
+                                a 2D surface plot (ptype=3). In the 1D plots the z-error will be indicated by a 
+                                shaded area (errstyle=0) rather than normal error bars (errstyle=1)
+                          IDL> plott, x0, y0, extralgd={text:['y0(x0)','y1(x1)'],color=['black','red']}, id=my_plot
+                          IDL> plott, x1, y1, col='red', overplot=my_plot
+                             => 1D plot of y0(x1) in black overplotted with y1(x1) in red, with a legend
+* save_dialog.pro     : widget for saving the cw_draw2d data as .eps or .png file.
+
+
+mdebock, 2010.03.18

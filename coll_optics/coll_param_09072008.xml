@@ -1,0 +1,441 @@
+<stark_settings description="Input parameters for the IDL STARK code">
+  <coll description="Data relevant to the Collection optics">
+    <xyz
+      description="The xyz-coordinates - in the machine coordinate system - of the collection lens."
+      unit="m"
+      type="float"
+      value="-0.949, -2.228,  0.000"/>
+    <k
+      description="The xyz-coordinates - in the machine coordinate system - of the k-vector of the collection lens.
+      This is the vector describing the optical axis and in the direction from the emission volume towards the
+      collection lens. REMARK: the collection lens coordinate system is given by: (k,l,m), with k the unit vector
+      given here, l=zxk/|zxk| - z being the z of the machine coordinate system - and m=kxl. This means that
+      k-coordinates are along the optical axis, l coordinates are horizontal and m-coordinates are - usually -
+      more or less vertical (if the optical axis is more or less horizontal)."
+      type="float"
+      value="-0.750, -0.662,  0.000"/>
+    <d
+      description="The diameter of the collection lens."
+      unit="mm"
+      type="float"
+      value="38.00"/>
+    <efl
+      description="Effective focal length of the collection lens (This is linked with the alpha - the opening angle
+      that corresponds with 1 mm on the fibre plate - through: efl = 1/tan(alpha) )."
+      unit="mm"
+      type="float"
+      value="72.98"/>
+    <fibre
+      description="Diameter of the optical core of the fibre and the diameter of the total fibre."
+      unit="micrometer"
+      type="float"
+      value="   400,   430"/>
+    <bundleID
+      description="The IDs of each fibre bundle. E.g. for MAST the MSE fibre bundles are named: MD142, MD142, ...,
+      MD181. REMARK: The xml-nodes further down in this file describing l- and m-coordinates of the fibres in each
+      fibrebundle should be named with this ID and the number of nodes should correspond with (twice, one for l-,
+      one for m-coordinates) the number of elements in this ID-list."
+      type="string"
+      value="MD142, MD143, MD144, MD145, MD146, MD147, MD148, MD149, MD150, MD151, MD152, MD153, MD154, MD155, MD156, MD157, MD158, MD159, MD160, MD161, MD162, MD163, MD164, MD165, MD166, MD167, MD168, MD169, MD170, MD171, MD172, MD173, MD174, MD175, MD176, MD177, MD178, MD179, MD180, MD181"/>
+    <MD142l
+      description="l-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value=" 17.804,  17.807,  17.811,  17.814,  17.818,  17.821,  17.825,  17.829,  17.832,  17.836,  17.452,  17.456,  17.459,  17.463,  17.466,  17.470,  17.473,  17.477,  17.481"/>
+    <MD142m
+      description="m-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  1.951,   1.526,   1.100,   0.675,   0.250,  -0.175,  -0.601,  -1.026,  -1.451,  -1.876,   1.702,   1.277,   0.852,   0.427,   0.001,  -0.424,  -0.849,  -1.274,  -1.700"/>
+    <MD143l
+      description="l-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value=" 17.096,  17.100,  17.104,  17.107,  17.111,  17.114,  17.118,  17.121,  17.125,  17.128,  16.745,  16.748,  16.752,  16.756,  16.759,  16.763,  16.766,  16.770,  16.773"/>
+    <MD143m
+      description="m-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  1.945,   1.520,   1.094,   0.669,   0.244,  -0.181,  -0.607,  -1.032,  -1.457,  -1.882,   1.697,   1.271,   0.846,   0.421,  -0.005,  -0.430,  -0.855,  -1.280,  -1.706"/>
+    <MD144l
+      description="l-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value=" 16.389,  16.393,  16.396,  16.400,  16.403,  16.407,  16.411,  16.414,  16.418,  16.421,  16.038,  16.041,  16.045,  16.048,  16.052,  16.055,  16.059,  16.063,  16.066"/>
+    <MD144m
+      description="m-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  1.939,   1.514,   1.089,   0.663,   0.238,  -0.187,  -0.612,  -1.038,  -1.463,  -1.888,   1.691,   1.265,   0.840,   0.415,  -0.010,  -0.436,  -0.861,  -1.286,  -1.711"/>
+    <MD145l
+      description="l-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value=" 15.682,  15.686,  15.689,  15.693,  15.696,  15.700,  15.703,  15.707,  15.710,  15.714,  15.330,  15.334,  15.338,  15.341,  15.345,  15.348,  15.352,  15.355,  15.359"/>
+    <MD145m
+      description="m-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  1.933,   1.508,   1.083,   0.657,   0.232,  -0.193,  -0.618,  -1.044,  -1.469,  -1.894,   1.685,   1.259,   0.834,   0.409,  -0.016,  -0.442,  -0.867,  -1.292,  -1.717"/>
+    <MD146l
+      description="l-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value=" 14.975,  14.978,  14.982,  14.985,  14.989,  14.993,  14.996,  15.000,  15.003,  15.007,  14.623,  14.627,  14.630,  14.634,  14.637,  14.641,  14.645,  14.648,  14.652"/>
+    <MD146m
+      description="m-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  1.927,   1.502,   1.077,   0.651,   0.226,  -0.199,  -0.624,  -1.050,  -1.475,  -1.900,   1.679,   1.254,   0.828,   0.403,  -0.022,  -0.448,  -0.873,  -1.298,  -1.723"/>
+    <MD147l
+      description="l-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value=" 13.235,  13.238,  13.242,  13.246,  13.249,  13.253,  13.256,  13.260,  13.263,  13.267,  12.883,  12.887,  12.890,  12.894,  12.898,  12.901,  12.905,  12.908,  12.912"/>
+    <MD147m
+      description="m-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  1.913,   1.487,   1.062,   0.637,   0.212,  -0.214,  -0.639,  -1.064,  -1.489,  -1.915,   1.664,   1.239,   0.814,   0.388,  -0.037,  -0.462,  -0.887,  -1.313,  -1.738"/>
+    <MD148l
+      description="l-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value=" 12.528,  12.531,  12.535,  12.538,  12.542,  12.545,  12.549,  12.553,  12.556,  12.560,  12.176,  12.180,  12.183,  12.187,  12.190,  12.194,  12.197,  12.201,  12.205"/>
+    <MD148m
+      description="m-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  1.907,   1.482,   1.056,   0.631,   0.206,  -0.220,  -0.645,  -1.070,  -1.495,  -1.921,   1.658,   1.233,   0.808,   0.383,  -0.043,  -0.468,  -0.893,  -1.318,  -1.744"/>
+    <MD149l
+      description="l-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value=" 11.820,  11.824,  11.828,  11.831,  11.835,  11.838,  11.842,  11.845,  11.849,  11.852,  11.469,  11.472,  11.476,  11.480,  11.483,  11.487,  11.490,  11.494,  11.497"/>
+    <MD149m
+      description="m-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  1.901,   1.476,   1.050,   0.625,   0.200,  -0.225,  -0.651,  -1.076,  -1.501,  -1.926,   1.652,   1.227,   0.802,   0.377,  -0.049,  -0.474,  -0.899,  -1.324,  -1.750"/>
+    <MD150l
+      description="l-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value=" 11.113,  11.117,  11.120,  11.124,  11.127,  11.131,  11.135,  11.138,  11.142,  11.145,  10.762,  10.765,  10.769,  10.772,  10.776,  10.779,  10.783,  10.787,  10.790"/>
+    <MD150m
+      description="m-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  1.895,   1.470,   1.044,   0.619,   0.194,  -0.231,  -0.657,  -1.082,  -1.507,  -1.932,   1.646,   1.221,   0.796,   0.371,  -0.055,  -0.480,  -0.905,  -1.330,  -1.756"/>
+    <MD151l
+      description="l-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value=" 10.406,  10.410,  10.413,  10.417,  10.420,  10.424,  10.427,  10.431,  10.434,  10.438,  10.054,  10.058,  10.062,  10.065,  10.069,  10.072,  10.076,  10.079,  10.083"/>
+    <MD151m
+      description="m-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  1.889,   1.464,   1.039,   0.613,   0.188,  -0.237,  -0.663,  -1.088,  -1.513,  -1.938,   1.641,   1.215,   0.790,   0.365,  -0.060,  -0.486,  -0.911,  -1.336,  -1.761"/>
+    <MD152l
+      description="l-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  9.073,   9.077,   9.080,   9.084,   9.087,   9.091,   9.094,   9.098,   9.102,   9.105,   8.722,   8.725,   8.729,   8.732,   8.736,   8.739,   8.743,   8.746,   8.750"/>
+    <MD152m
+      description="m-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  1.878,   1.453,   1.027,   0.602,   0.177,  -0.248,  -0.674,  -1.099,  -1.524,  -1.949,   1.629,   1.204,   0.779,   0.354,  -0.072,  -0.497,  -0.922,  -1.347,  -1.773"/>
+    <MD153l
+      description="l-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  8.366,   8.369,   8.373,   8.377,   8.380,   8.384,   8.387,   8.391,   8.394,   8.398,   8.014,   8.018,   8.021,   8.025,   8.029,   8.032,   8.036,   8.039,   8.043"/>
+    <MD153m
+      description="m-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  1.872,   1.447,   1.021,   0.596,   0.171,  -0.254,  -0.680,  -1.105,  -1.530,  -1.955,   1.623,   1.198,   0.773,   0.348,  -0.078,  -0.503,  -0.928,  -1.353,  -1.779"/>
+    <MD154l
+      description="l-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  7.659,   7.662,   7.666,   7.669,   7.673,   7.676,   7.680,   7.684,   7.687,   7.691,   7.307,   7.311,   7.314,   7.318,   7.321,   7.325,   7.328,   7.332,   7.336"/>
+    <MD154m
+      description="m-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  1.866,   1.441,   1.016,   0.590,   0.165,  -0.260,  -0.685,  -1.111,  -1.536,  -1.961,   1.618,   1.192,   0.767,   0.342,  -0.083,  -0.509,  -0.934,  -1.359,  -1.784"/>
+    <MD155l
+      description="l-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  6.951,   6.955,   6.959,   6.962,   6.966,   6.969,   6.973,   6.976,   6.980,   6.983,   6.600,   6.603,   6.607,   6.611,   6.614,   6.618,   6.621,   6.625,   6.628"/>
+    <MD155m
+      description="m-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  1.860,   1.435,   1.010,   0.584,   0.159,  -0.266,  -0.691,  -1.117,  -1.542,  -1.967,   1.612,   1.186,   0.761,   0.336,  -0.089,  -0.515,  -0.940,  -1.365,  -1.790"/>
+    <MD156l
+      description="l-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  6.244,   6.248,   6.251,   6.255,   6.258,   6.262,   6.266,   6.269,   6.273,   6.276,   5.893,   5.896,   5.900,   5.903,   5.907,   5.910,   5.914,   5.918,   5.921"/>
+    <MD156m
+      description="m-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  1.854,   1.429,   1.004,   0.578,   0.153,  -0.272,  -0.697,  -1.123,  -1.548,  -1.973,   1.606,   1.180,   0.755,   0.330,  -0.095,  -0.521,  -0.946,  -1.371,  -1.796"/>
+    <MD157l
+      description="l-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  4.196,   4.199,   4.203,   4.207,   4.210,   4.214,   4.217,   4.221,   4.224,   4.228,   3.844,   3.848,   3.851,   3.855,   3.859,   3.862,   3.866,   3.869,   3.873"/>
+    <MD157m
+      description="m-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  1.837,   1.412,   0.987,   0.561,   0.136,  -0.289,  -0.714,  -1.140,  -1.565,  -1.990,   1.589,   1.163,   0.738,   0.313,  -0.112,  -0.538,  -0.963,  -1.388,  -1.813"/>
+    <MD158l
+      description="l-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  3.489,   3.492,   3.496,   3.499,   3.503,   3.506,   3.510,   3.514,   3.517,   3.521,   3.137,   3.141,   3.144,   3.148,   3.151,   3.155,   3.158,   3.162,   3.166"/>
+    <MD158m
+      description="m-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  1.831,   1.406,   0.981,   0.555,   0.130,  -0.295,  -0.720,  -1.146,  -1.571,  -1.996,   1.583,   1.157,   0.732,   0.307,  -0.118,  -0.544,  -0.969,  -1.394,  -1.819"/>
+    <MD159l
+      description="l-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  2.781,   2.785,   2.789,   2.792,   2.796,   2.799,   2.803,   2.806,   2.810,   2.813,   2.430,   2.433,   2.437,   2.441,   2.444,   2.448,   2.451,   2.455,   2.458"/>
+    <MD159m
+      description="m-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  1.825,   1.400,   0.975,   0.549,   0.124,  -0.301,  -0.726,  -1.152,  -1.577,  -2.002,   1.577,   1.151,   0.726,   0.301,  -0.124,  -0.550,  -0.975,  -1.400,  -1.825"/>
+    <MD160l
+      description="l-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  2.074,   2.078,   2.081,   2.085,   2.088,   2.092,   2.096,   2.099,   2.103,   2.106,   1.723,   1.726,   1.730,   1.733,   1.737,   1.740,   1.744,   1.748,   1.751"/>
+    <MD160m
+      description="m-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  1.819,   1.394,   0.969,   0.544,   0.118,  -0.307,  -0.732,  -1.157,  -1.583,  -2.008,   1.571,   1.146,   0.720,   0.295,  -0.130,  -0.555,  -0.981,  -1.406,  -1.831"/>
+    <MD161l
+      description="l-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  1.367,   1.371,   1.374,   1.378,   1.381,   1.385,   1.388,   1.392,   1.395,   1.399,   1.015,   1.019,   1.023,   1.026,   1.030,   1.033,   1.037,   1.040,   1.044"/>
+    <MD161m
+      description="m-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  1.813,   1.388,   0.963,   0.538,   0.112,  -0.313,  -0.738,  -1.163,  -1.589,  -2.014,   1.565,   1.140,   0.714,   0.289,  -0.136,  -0.561,  -0.987,  -1.412,  -1.837"/>
+    <MD162l
+      description="l-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value=" -0.238,  -0.234,  -0.231,  -0.227,  -0.224,  -0.220,  -0.217,  -0.213,  -0.210,  -0.206,  -0.590,  -0.586,  -0.582,  -0.579,  -0.575,  -0.572,  -0.568,  -0.565,  -0.561"/>
+    <MD162m
+      description="m-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  1.800,   1.375,   0.949,   0.524,   0.099,  -0.326,  -0.752,  -1.177,  -1.602,  -2.027,   1.551,   1.126,   0.701,   0.276,  -0.150,  -0.575,  -1.000,  -1.425,  -1.851"/>
+    <MD163l
+      description="l-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value=" -0.945,  -0.942,  -0.938,  -0.935,  -0.931,  -0.927,  -0.924,  -0.920,  -0.917,  -0.913,  -1.297,  -1.293,  -1.290,  -1.286,  -1.283,  -1.279,  -1.275,  -1.272,  -1.268"/>
+    <MD163m
+      description="m-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  1.794,   1.369,   0.944,   0.518,   0.093,  -0.332,  -0.757,  -1.183,  -1.608,  -2.033,   1.546,   1.120,   0.695,   0.270,  -0.155,  -0.581,  -1.006,  -1.431,  -1.856"/>
+    <MD164l
+      description="l-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value=" -1.652,  -1.649,  -1.645,  -1.642,  -1.638,  -1.635,  -1.631,  -1.628,  -1.624,  -1.620,  -2.004,  -2.000,  -1.997,  -1.993,  -1.990,  -1.986,  -1.983,  -1.979,  -1.976"/>
+    <MD164m
+      description="m-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  1.788,   1.363,   0.938,   0.512,   0.087,  -0.338,  -0.763,  -1.189,  -1.614,  -2.039,   1.540,   1.114,   0.689,   0.264,  -0.161,  -0.587,  -1.012,  -1.437,  -1.862"/>
+    <MD165l
+      description="l-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value=" -2.360,  -2.356,  -2.353,  -2.349,  -2.345,  -2.342,  -2.338,  -2.335,  -2.331,  -2.328,  -2.711,  -2.708,  -2.704,  -2.701,  -2.697,  -2.693,  -2.690,  -2.686,  -2.683"/>
+    <MD165m
+      description="m-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  1.782,   1.357,   0.932,   0.506,   0.081,  -0.344,  -0.769,  -1.195,  -1.620,  -2.045,   1.534,   1.108,   0.683,   0.258,  -0.167,  -0.593,  -1.018,  -1.443,  -1.868"/>
+    <MD166l
+      description="l-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value=" -3.067,  -3.063,  -3.060,  -3.056,  -3.053,  -3.049,  -3.046,  -3.042,  -3.038,  -3.035,  -3.418,  -3.415,  -3.411,  -3.408,  -3.404,  -3.401,  -3.397,  -3.394,  -3.390"/>
+    <MD166m
+      description="m-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  1.776,   1.351,   0.926,   0.501,   0.075,  -0.350,  -0.775,  -1.200,  -1.626,  -2.051,   1.528,   1.103,   0.677,   0.252,  -0.173,  -0.598,  -1.024,  -1.449,  -1.874"/>
+    <MD167l
+      description="l-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value=" -4.713,  -4.710,  -4.706,  -4.702,  -4.699,  -4.695,  -4.692,  -4.688,  -4.685,  -4.681,  -5.065,  -5.061,  -5.058,  -5.054,  -5.050,  -5.047,  -5.043,  -5.040,  -5.036"/>
+    <MD167m
+      description="m-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  1.763,   1.337,   0.912,   0.487,   0.062,  -0.364,  -0.789,  -1.214,  -1.640,  -2.065,   1.514,   1.089,   0.664,   0.238,  -0.187,  -0.612,  -1.037,  -1.463,  -1.888"/>
+    <MD168l
+      description="l-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value=" -5.420,  -5.417,  -5.413,  -5.410,  -5.406,  -5.403,  -5.399,  -5.395,  -5.392,  -5.388,  -5.772,  -5.768,  -5.765,  -5.761,  -5.758,  -5.754,  -5.751,  -5.747,  -5.743"/>
+    <MD168m
+      description="m-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  1.757,   1.331,   0.906,   0.481,   0.056,  -0.370,  -0.795,  -1.220,  -1.645,  -2.071,   1.508,   1.083,   0.658,   0.232,  -0.193,  -0.618,  -1.043,  -1.469,  -1.894"/>
+    <MD169l
+      description="l-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value=" -6.128,  -6.124,  -6.120,  -6.117,  -6.113,  -6.110,  -6.106,  -6.103,  -6.099,  -6.096,  -6.479,  -6.476,  -6.472,  -6.468,  -6.465,  -6.461,  -6.458,  -6.454,  -6.451"/>
+    <MD169m
+      description="m-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  1.751,   1.325,   0.900,   0.475,   0.050,  -0.376,  -0.801,  -1.226,  -1.651,  -2.077,   1.502,   1.077,   0.652,   0.226,  -0.199,  -0.624,  -1.049,  -1.475,  -1.900"/>
+    <MD170l
+      description="l-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value=" -6.835,  -6.831,  -6.828,  -6.824,  -6.821,  -6.817,  -6.813,  -6.810,  -6.806,  -6.803,  -7.186,  -7.183,  -7.179,  -7.176,  -7.172,  -7.169,  -7.165,  -7.161,  -7.158"/>
+    <MD170m
+      description="m-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  1.745,   1.320,   0.894,   0.469,   0.044,  -0.382,  -0.807,  -1.232,  -1.657,  -2.083,   1.496,   1.071,   0.646,   0.221,  -0.205,  -0.630,  -1.055,  -1.480,  -1.906"/>
+    <MD171l
+      description="l-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value=" -7.542,  -7.538,  -7.535,  -7.531,  -7.528,  -7.524,  -7.521,  -7.517,  -7.514,  -7.510,  -7.894,  -7.890,  -7.886,  -7.883,  -7.879,  -7.876,  -7.872,  -7.869,  -7.865"/>
+    <MD171m
+      description="m-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  1.739,   1.314,   0.888,   0.463,   0.038,  -0.387,  -0.813,  -1.238,  -1.663,  -2.088,   1.490,   1.065,   0.640,   0.215,  -0.211,  -0.636,  -1.061,  -1.486,  -1.912"/>
+    <MD172l
+      description="l-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value=" -8.875,  -8.871,  -8.868,  -8.864,  -8.861,  -8.857,  -8.854,  -8.850,  -8.847,  -8.843,  -9.227,  -9.223,  -9.219,  -9.216,  -9.212,  -9.209,  -9.205,  -9.202,  -9.198"/>
+    <MD172m
+      description="m-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  1.728,   1.302,   0.877,   0.452,   0.027,  -0.399,  -0.824,  -1.249,  -1.674,  -2.100,   1.479,   1.054,   0.629,   0.203,  -0.222,  -0.647,  -1.072,  -1.498,  -1.923"/>
+    <MD173l
+      description="l-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value=" -9.582,  -9.579,  -9.575,  -9.572,  -9.568,  -9.564,  -9.561,  -9.557,  -9.554,  -9.550,  -9.934,  -9.930,  -9.927,  -9.923,  -9.920,  -9.916,  -9.912,  -9.909,  -9.905"/>
+    <MD173m
+      description="m-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  1.722,   1.297,   0.871,   0.446,   0.021,  -0.404,  -0.830,  -1.255,  -1.680,  -2.106,   1.473,   1.048,   0.623,   0.198,  -0.228,  -0.653,  -1.078,  -1.503,  -1.929"/>
+    <MD174l
+      description="l-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="-10.289, -10.286, -10.282, -10.279, -10.275, -10.272, -10.268, -10.265, -10.261, -10.257, -10.641, -10.637, -10.634, -10.630, -10.627, -10.623, -10.620, -10.616, -10.613"/>
+    <MD174m
+      description="m-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  1.716,   1.291,   0.865,   0.440,   0.015,  -0.410,  -0.836,  -1.261,  -1.686,  -2.111,   1.467,   1.042,   0.617,   0.192,  -0.234,  -0.659,  -1.084,  -1.509,  -1.935"/>
+    <MD175l
+      description="l-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="-10.997, -10.993, -10.990, -10.986, -10.982, -10.979, -10.975, -10.972, -10.968, -10.965, -11.348, -11.345, -11.341, -11.338, -11.334, -11.330, -11.327, -11.323, -11.320"/>
+    <MD175m
+      description="m-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  1.710,   1.285,   0.859,   0.434,   0.009,  -0.416,  -0.842,  -1.267,  -1.692,  -2.117,   1.461,   1.036,   0.611,   0.186,  -0.240,  -0.665,  -1.090,  -1.515,  -1.941"/>
+    <MD176l
+      description="l-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="-11.704, -11.700, -11.697, -11.693, -11.690, -11.686, -11.683, -11.679, -11.675, -11.672, -12.055, -12.052, -12.048, -12.045, -12.041, -12.038, -12.034, -12.031, -12.027"/>
+    <MD176m
+      description="m-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  1.704,   1.279,   0.854,   0.428,   0.003,  -0.422,  -0.847,  -1.273,  -1.698,  -2.123,   1.456,   1.030,   0.605,   0.180,  -0.245,  -0.671,  -1.096,  -1.521,  -1.946"/>
+    <MD177l
+      description="l-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="-13.771, -13.768, -13.764, -13.761, -13.757, -13.754, -13.750, -13.746, -13.743, -13.739, -14.123, -14.119, -14.116, -14.112, -14.109, -14.105, -14.102, -14.098, -14.094"/>
+    <MD177m
+      description="m-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  1.687,   1.261,   0.836,   0.411,  -0.014,  -0.440,  -0.865,  -1.290,  -1.715,  -2.141,   1.438,   1.013,   0.588,   0.162,  -0.263,  -0.688,  -1.113,  -1.539,  -1.964"/>
+    <MD178l
+      description="l-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="-14.479, -14.475, -14.471, -14.468, -14.464, -14.461, -14.457, -14.454, -14.450, -14.447, -14.830, -14.827, -14.823, -14.819, -14.816, -14.812, -14.809, -14.805, -14.802"/>
+    <MD178m
+      description="m-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  1.681,   1.256,   0.830,   0.405,  -0.020,  -0.445,  -0.871,  -1.296,  -1.721,  -2.146,   1.432,   1.007,   0.582,   0.157,  -0.269,  -0.694,  -1.119,  -1.544,  -1.970"/>
+    <MD179l
+      description="l-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="-15.186, -15.182, -15.179, -15.175, -15.172, -15.168, -15.164, -15.161, -15.157, -15.154, -15.537, -15.534, -15.530, -15.527, -15.523, -15.520, -15.516, -15.512, -15.509"/>
+    <MD179m
+      description="m-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  1.675,   1.250,   0.824,   0.399,  -0.026,  -0.451,  -0.877,  -1.302,  -1.727,  -2.152,   1.426,   1.001,   0.576,   0.151,  -0.275,  -0.700,  -1.125,  -1.550,  -1.976"/>
+    <MD180l
+      description="l-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="-15.893, -15.889, -15.886, -15.882, -15.879, -15.875, -15.872, -15.868, -15.865, -15.861, -16.245, -16.241, -16.237, -16.234, -16.230, -16.227, -16.223, -16.220, -16.216"/>
+    <MD180m
+      description="m-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  1.669,   1.244,   0.818,   0.393,  -0.032,  -0.457,  -0.883,  -1.308,  -1.733,  -2.158,   1.421,   0.995,   0.570,   0.145,  -0.281,  -0.706,  -1.131,  -1.556,  -1.982"/>
+    <MD181l
+      description="l-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="-16.600, -16.597, -16.593, -16.590, -16.586, -16.582, -16.579, -16.575, -16.572, -16.568, -16.952, -16.948, -16.945, -16.941, -16.938, -16.934, -16.930, -16.927, -16.923"/>
+    <MD181m
+      description="m-coordinates in mm of the fibres in this fibrebundle"
+      unit="mm"
+      type="float"
+      value="  1.663,   1.238,   0.813,   0.387,  -0.038,  -0.463,  -0.888,  -1.314,  -1.739,  -2.164,   1.415,   0.989,   0.564,   0.139,  -0.286,  -0.712,  -1.137,  -1.562,  -1.987"/>
+  </coll>
+</stark_settings>

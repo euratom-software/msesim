@@ -1,0 +1,17 @@
+; This file contains the histogram or probability distribution of the beam modulation/ripple.
+; It is a simple text file with in a first column the ripple voltages (with respect to the nominal voltage)
+; and in a second column their probability. The number records/lines gives the number of sampling points
+; for the beam voltage modulation. The probability column should add up to 1!
+;
+; V_mod [V]	probability
+;----------	-----------
+ -1403.9	0.042
+ -1153.9	0.054
+  -903.9	0.024
+  -653.9	0.030
+  -403.9	0.078
+  -153.9	0.090
+    96.1	0.311
+   346.1	0.155
+   596.1	0.150
+   846.1	0.066
