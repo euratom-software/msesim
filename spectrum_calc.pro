@@ -103,7 +103,9 @@ print,FORMAT='($,A)',"................................... "
 ;----------------------------------------------------------------------------------
 common physics, c, kb, em, e, pm, nm, RydInf
 
-fname = ['/home/sgibson/PycharmProjects/msesim/equi/physics/','physic_constants.xml']
+;fname = ['/home/sgibson/PycharmProjects/msesim/equi/physics/','physic_constants.xml']
+cwd = getenv('PWD')
+fname = [cwd+'/equi/physics/','physic_constants.xml']
 
 physics  = readxml(fname)
 c        = physics.c		; light speed (m/s)
@@ -131,7 +133,7 @@ a        = input.equi.a			; Minor radius of the plasma in the midplane (m)
 equifile = input.equi.file		; Name of the file that contains the results of the
 
 if ~strcmp('none',equifile,/fold_case) then begin
-  equifile = '/home/sgibson/PycharmProjects/msesim/equi/' + STRING(equifile); equilibrium code. If the filename is set to 'none'
+  equifile = cwd+'/equi/' + STRING(equifile); equilibrium code. If the filename is set to 'none'
 endif					; than the build-in equilibrium model is used.
 
 ; Following parameters are needed for the build-in equilibrium model 
@@ -743,7 +745,7 @@ endens_tmp = float(atomdata_temp)
 
 ; Structure nonstat_data: first row electron density, second raw = sigma0, third raw sigma +/-1, fourth raw is pi+/-2 …
 nonstat_data = fltarr(8,6)
-OpenR, lun, '/home/sgibson/PycharmProjects/msesim/' + sep + 'equi' + sep+'physics'+sep+'stark'+sep+'stark_plasma_nonstat.csv', /Get_Lun
+OpenR, lun, cwd+'/' + sep + 'equi' + sep+'physics'+sep+'stark'+sep+'stark_plasma_nonstat.csv', /Get_Lun
 ReadF, lun, nonstat_data
 Free_Lun, lun
 
