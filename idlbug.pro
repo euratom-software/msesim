@@ -1,3 +1,5 @@
+; This file demonstrates the Postscript font bug in IDL 8.4
+
 set_plot,'PS'
 !p.font=0
 device,/Color, File='bug.eps', /encapsulated
