@@ -46,8 +46,3 @@ example of this in the runs/test folder.
    `> msesim, 'name of directory within <runs>'`
    
 ## Issues
-
- * Only issue (which I think is an issue raised on my git) is the greek letters issue, if you had any ideas on how to fix that it would be useful :-) The readxml.pro code and any of the dependencies are stored within the common/ folder.
-
- * there are some plotting libraries missing. I'll endeavour to find them and add
-   them to the repository.
