@@ -52,9 +52,6 @@ sourcedir  = strmid(sourcefile,0,strpos(sourcefile, sep, /reverse_search))
 cd, sourcedir
 
 
-
-
-
 ; set standard 'batch.xml' if no custom one is specified by the batchfile-keyword
 if ~keyword_set(batchfile) then batchfile='batch.xml'
 batchfile = sourcedir+sep+'runs'+sep+run+sep+batchfile

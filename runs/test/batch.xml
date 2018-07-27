@@ -1,24 +1,6 @@
 <stark_run description="Calculate spectra">
   <calc   description="calculate spectra"
-          settingfile="density2e19m3_highB.xml"
-          outputfile ="density2e19m3_highB.dat"
+          settingfile="MAST_18501_imse.xml"
+          outputfile ="MAST_18501_imse.dat"
           />
-  <filter description="filter spectra with ideal filters"
-          settingfile="calculated_filters.xml"
-          inputfile  ="density2e19m3_highB.dat"
-          outputfile ="density2e19m3_highB_filtered.dat"
-          />
-
-  <plot   description="plot the unfiltered spectra"
-          settingfile="plot.xml"
-          inputfile  ="density2e19m3_highB_filtered.dat"
-          prefix     ="filtered_spectra"
-          />
-
-  <plot   description="plot the unfiltered spectra"
-          settingfile="plot.xml"
-          inputfile  ="density2e19m3_highB.dat"
-          prefix     ="unfiltered_spectra"
-          />
-
 </stark_run>
