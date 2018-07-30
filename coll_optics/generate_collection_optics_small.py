@@ -6,15 +6,12 @@ from xml.dom import minidom
 tree = xml.etree.ElementTree.parse('xml_template.xml')
 root = tree.getroot()
 
-x_length = np.linspace(-10.23,10.23,32)
-y_length = np.linspace(-10.23,10.23,32)
+x_length = np.linspace(-10.24,10.24,32)
+y_length = np.linspace(-10.24,10.24,32)
 
-fname = "imse_2d_32x32_centerpixel.xml"
+fname = "imse_2d_32x32_f80mm.xml"
 
 grid_x, grid_y = np.meshgrid(x_length, y_length)
-
-# grid_x = grid_x[::32]
-# grid_y = grid_y[::32]
 
 pixel_names = []
 attrib_x = dict()
