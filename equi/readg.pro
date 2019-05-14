@@ -157,7 +157,7 @@ keepgo2:
 ;At this point we should have the values of mw and mh.  A typical error
 ;seems to be that these are 0 for some as yet undetermined reason.
 ;
-if( (mw eq 0) or (mh eq 0) ) then return,g  ;g.error will be true (=1).
+if( (mw eq 0) or (mh eq 0) ) then return, g  ;g.error will be true (=1).
 ;
 ;----------------------------------------------------------------------
 ;Define the structure to be returned using mh and mw.  
@@ -219,6 +219,7 @@ if(fileformatted) then begin
    readf,lun,pprime,format='(5e16.9)'
    readf,lun,psirz,format='(5e16.9)'
    readf,lun,qpsi,format='(5e16.9)'
+ 
 endif else begin
    print,'Reading unformatted g0file'
    readu,lun,xdim,zdim,rzero,rgrid1,zmid
@@ -306,6 +307,7 @@ endif
 ;----------------------------------------------------------------------
 ;Copy the variables into the structure.
 ;
+
 g.ecase = ecase
 g.mw = mw
 g.mh = mh
@@ -317,7 +319,7 @@ g.zmid=zmid
 g.rmaxis=rmaxis
 g.zmaxis=zmaxis
 g.ssimag=ssimag 
-g.ssibry=ssibry 
+g.ssibry=ssibry
 g.bcentr=bcentr 
 g.cpasma=cpasma 
 g.fpol=fpol

@@ -34,37 +34,38 @@ print, 'maindir = ' + maindir
 
 ; Read the gfile
 
-g=readg(gfile) ; returns the g.eqdsk file as a structure
+g=read_neqdsk(gfile) ; returns the g.eqdsk file as a structure
+psirz = g.psirz/2*!pi ; the fluxcoords, divide by 2pi if using a fiesta equilibrium, remove if not
 
-psirz = g.psirz ; the fluxcoords
-arrsize = n_elements(psirz[*,0])
+arrsize1 = n_elements(psirz[*,0])
+arrsize2 = n_elements(psirz[0,*])
 
+fluxcoord = (psirz-(g.simagx/2*!pi))/((g.sibdry-g.simagx)/2*!pi)
 
-if (keyword_set(fluxold)) then begin
-
-	if arrsize eq 65 then begin
-
-		restore, maindir + sep + 'equi' + sep + 'equi_KSTAR_Te=2500eV_ne=5e19m3_Ip=0.5MA_B=2T.sav'
-
-		fluxcoord=fluxcoord ; we use this one
-
-	endif else begin
-
-		fluxcoord=congrid(fluxcoord, arrsize, arrsize, /interp) ; rebin (non-integer)
-
-	endelse
-
-	fluxoldflag = '_oldflux'
-
-endif
-
-if ~(keyword_set(fluxold)) then begin
-
-		fluxcoord = (psirz-g.ssimag)/(g.ssibry-g.ssimag)
-
-		fluxoldflag = ''
-endif
-
+;if (keyword_set(fluxold)) then begin
+;
+;	if arrsize eq 65 then begin
+;
+;		restore, maindir + sep + 'equi' + sep + 'equi_KSTAR_Te=2500eV_ne=5e19m3_Ip=0.5MA_B=2T.sav'
+;
+;		fluxcoord=fluxcoord ; we use this one
+;
+;	endif else begin
+;
+;		fluxcoord=congrid(fluxcoord, arrsize, arrsize, /interp) ; rebin (non-integer)
+;
+;	endelse
+;
+;	fluxoldflag = '_oldflux'
+;
+;endif
+;
+;if ~(keyword_set(fluxold)) then begin
+;
+;		fluxcoord = (psirz-g.ssimag)/(g.ssibry-g.ssimag)
+;
+;		fluxoldflag = ''
+;endif
 
 
 
@@ -79,8 +80,8 @@ bfld[1,*,*]=bz
 bfld[2,*,*]=bt
 
 Rm=g.rzero
-R=g.R
-Z=g.Z
+R=g.R[*,0]
+Z=g.Z[0,*]
 
 gfile=strmid(gfile,strpos(gfile,sep,/reverse_search)+1,15)
 shot = strmid(gfile,3,4)
