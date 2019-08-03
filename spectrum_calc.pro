@@ -481,9 +481,11 @@ cp_xyz = coordtrans([replicate(0.0,1,n_C),cp1],[[O1],[X1],[Y1]])
 ; read in the coordinates of all beamlets
 ; REMARK: these are (y,z)-coordinates in the beam coordinate system with B_vec as
 ; as x-axis.
+
 pini  = read_txt(pinifile)
 npini = round(0.5*n_elements(pini))
 pini  = reform(pini,2,npini)
+
 if (h_div*v_div gt n_elements(pini[0,*])) then begin
   ; if h_div*v_div is greater than the number of pini-beamlets, we just use the all pini-beamlets
   n_div = n_elements(pini[0,*])
@@ -582,6 +584,8 @@ endif else begin
 endelse
 Bfld0 = equi.Bfld
 psi0  = equi.psi
+
+
 ; get the electrostatic field at the central emission points
 if strcmp('none',Erfile,/fold_case) then begin		; if there is no Er-file than calculate
   Er0 = calc_Er(xyz0,Bfld0,psi0,Ermax,Eridx)		; Er using the build-in model
@@ -708,7 +712,9 @@ endif else begin
   equi  = read_equi(xyztmp, equifile)		; else: get the equilibrium from the file
 endelse
 RZpsi = equi.psi
+
 RZpsi = transpose(reform(RZpsi,nZ,nR))
+
 
 
 ;----------------------------------------------------------------------------------
@@ -916,6 +922,7 @@ for k=0,nchan-1 do begin
   ; we also need to know the velocity distribution of the beam particles at each point
   beamdir = calc_beamdir(gp_xyz[*,0:gp_n-1,k], B_src, B_vec, B_hf, B_vf, B_div, pini)
   gp_vel[*,0:gp_n-1,k] = beamdir.avvel
+
   n_div   = n_elements(beamdir[0].vel[0,*])
   print, 'done!'
 
@@ -952,7 +959,7 @@ for k=0,nchan-1 do begin
   ;----------------------------------------------------------------------------------
   ; Loop trough the grid points
   ;----------------------------------------------------------------------------------
-  ; inform the user how many iterations he can expect
+  ; inform the user how many iterations she can expect
   ntot  = long(gp_n)*long(B_nEf)*long(n_div)*long(n_C)	; total number of iterations needed for 1 spectrum
   print,FORMAT='($,A,(I8),A)',"  - calculating emission from each grid point (",ntot," iterations) "
   ; set 'percentage done' to zero

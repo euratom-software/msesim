@@ -1,0 +1,9 @@
+; This ASCII spreadsheet file contains the y- and z-coordinates
+; of the PINI-holes in the beam coordinate system used by the STARK-code
+; (this is the coordinate system with the x-axis on the beam axis and
+;  the y-axis in the xy-plane of the machine coordinate system).
+; The coordinates are given in [m].
+; The data was collected from the "GRID_MKIII.dat" data-file.
+;
+;     y [m]        z[m]
+     0.00825000   -0.0305000

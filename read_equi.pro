@@ -57,7 +57,7 @@ Zi = (Zpos-min(Z))/(max(Z)-min(Z)) * (n_elements(Z)-1)
 BR   = reform(interpolate(Bfld[0,*,*],Ri,Zi),1,n)
 BZ   = reform(interpolate(Bfld[1,*,*],Ri,Zi),1,n)
 Bphi = reform(interpolate(Bfld[2,*,*],Ri,Zi),1,n)
-psi  = reform(interpolate(fluxcoord,Ri,Zi),1,n)
+psi  = reform(interpolate(transpose(fluxcoord),Ri,Zi),1,n)
 
 ; create the B-field vector in xyz-coordinates
 Bfld = fltarr(3,n)
@@ -72,6 +72,7 @@ idx   = where(theta lt 0.0, count)
 if (count ne 0) then theta(idx) += 2*!pi
 
 ; make the structure
+
 equi = {Bfld:Bfld, psi:psi, theta:theta, Rm:Rm}
 ; return the result
 return, equi

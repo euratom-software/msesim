@@ -1,6 +1,11 @@
 <stark_run description="Calculate spectra">
   <calc   description="calculate spectra"
-          settingfile="MAST_18501_imse.xml"
-          outputfile ="MAST_18501_imse.dat"
+          settingfile="test_settings.xml"
+          outputfile ="test_settings.dat"
+          />
+  <plot   description="plot the unfiltered spectra"
+          settingfile="plot.xml"
+          inputfile  ="test_settings.dat"
+          prefix     ="unfiltered_spectra"
           />
 </stark_run>

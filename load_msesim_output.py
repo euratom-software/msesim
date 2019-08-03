@@ -77,15 +77,19 @@ class MSESIM(object):
 
         self.stokes_total = np.array(self.data["total_stokes"])
 
+        print(self.stokes_total.shape)
+
         self.S0 = self.stokes_total[:,0,:]
         self.S1 = self.stokes_total[:,1,:]
         self.S2 = self.stokes_total[:,2,:]
         self.S3 = self.stokes_total[:,3,:]
 
+        # self.cwl = self.stokes_total[:,4]
+
         self.wavelength = np.array(self.data["wavelength_vector"])/10 #in nanometers
 
-        self.major_radius = np.array(self.data["resolution_vector(R)"])[:,0]
-        self.major_radius = self.major_radius[::-1]
+        self.major_radius = np.array(self.data["resolution_vector(R)"])[:,2]
+        #self.major_radius = self.major_radius[::-1]
 
         self.polarised_fraction = np.sqrt(self.S1**2 + self.S2**2+self.S3**2)/self.S0
         self.total_unpolarised = (self.S0 - np.sqrt(self.S1**2 + self.S2**2 + self.S3**2))/self.S0
@@ -95,12 +99,15 @@ class MSESIM(object):
         self.CPF = self.total_circular/self.S0
 
         self.circular_total = np.sqrt(self.S3**2)/self.S0 #total circular polarisation fraction
-        self.gamma = 0.5*np.arctan2(self.S2, self.S1)*(180./np.pi) #polarisation angle
+
+        self.gamma = 0.5*np.arctan2(self.S2,self.S1)*(180./np.pi) #polarisation angle
 
     def plot_spectrum(self, radius):
 
         # Find the radii for the spectrum you want to plot
         idx = self._find_nearest(self.major_radius, value=radius)
+
+        print(idx)
 
         #manager = plt.get_current_fig_manager()
         #manager.window.showMaximized()
@@ -123,29 +130,54 @@ class MSESIM(object):
         # ax2.plot(self.wavelength, self.circular_total[idx,idx,:].T*100, label='Circular fraction')
         # plt.xlabel('Fraction of circularly polarised light (%)')
 
-        ax2 = fig.add_subplot(gs1[-1, :-1])
-        plt.plot(self.wavelength, self.gamma[16,idx,:].T, label='$\gamma$')
-        plt.yticks(np.arange(-45., 46, 45))
-        plt.xlabel('Wavelength (nm)')
-        plt.ylabel('Polarisation angle $\gamma$ (deg.)')
+        # ax2 = fig.add_subplot(gs1[-1, :-1])
+        # plt.plot(self.wavelength, self.gamma[idx,:].T, label='$\gamma$')
+        # plt.yticks(np.arange(-45., 46, 45))
+        # plt.xlabel('Wavelength (nm)')
+        # plt.ylabel('Polarisation angle $\gamma$ (deg.)')
+        #
+        # ax3 = fig.add_subplot(gs1[-1, -1])
+        # ax3.plot(self.wavelength, self.circular_total[idx, :].T, label='$CPF$')
+        # ax3.plot(self.wavelength, self.total_unpolarised[idx,:].T, color='black', label='$UF$')
+        # plt.yticks(np.arange(0, 1, 0.2))
+        # ax3.yaxis.tick_right()
+        # ax3.yaxis.set_label_position("right")
+        # ax3.legend(prop={'size': 18})
+        # plt.ylabel('Polarised Fraction', labelpad=10)
+        # plt.xlabel('Wavelength (nm)')
 
-        ax3 = fig.add_subplot(gs1[-1, -1])
-        ax3.plot(self.wavelength, self.circular_total[idx, idx, :].T, label='$CPF$')
-        ax3.plot(self.wavelength, self.total_unpolarised[idx, idx, :].T, color='black', label='$UF$')
-        plt.yticks(np.arange(0, 1, 0.2))
-        ax3.yaxis.tick_right()
-        ax3.yaxis.set_label_position("right")
-        ax3.legend(prop={'size': 18})
-        plt.ylabel('Polarised Fraction', labelpad=10)
-        plt.xlabel('Wavelength (nm)')
         plt.show()
 
 
-#Example
-idl.execute("restore, '/home/sgibson/Downloads/compass_test.dat', /VERBOSE")
-msesim = MSESIM(n_fibers=32)
-data = msesim.load_msesim_spectrum()
+idl.execute("restore, '/work/sgibson/msesim/runs/test/output/data/test_settings.dat, /VERBOSE")
 
-print(data.keys())
+msesim = MSESIM(n_fibers=40)
+msesim.plot_spectrum(radius=1.0)
 
-#msesim.plot_spectrum(radius=0.4)
+
+# #Example
+# idl.execute("restore, '/work/sgibson/msesim/runs/conventional_mse_mastu_fiesta1MA/output/data/conventional_mse_mastu.dat', /VERBOSE")
+# fiesta = MSESIM(n_fibers=40)
+
+# fiesta_r = fiesta.major_radius
+# fiesta_gamma = fiesta.gamma
+#
+# plt.figure()
+# plt.plot(fiesta_r[::-1], -1*fiesta_gamma, color='C0', label='fiesta 1MA')
+#
+# idl.execute("restore, '/work/sgibson/msesim/runs/conventional_mse_mastu_K25_scenario/output/data/conventional_mse_mastu_k25_scenario.dat', /VERBOSE")
+# k25 = MSESIM(n_fibers=40)
+#
+# k25_r = k25.major_radius
+# k25_gamma = k25.gamma
+#
+# plt.plot(k25_r[::-1], -1*k25_gamma, color='C1', label='k25')
+# plt.xlabel('Major radius R (m)')
+# plt.ylabel('Polarisation Angle (Degrees)')
+#
+# plt.axvline(x=1.34, linestyle='--', color='black')
+# plt.plot(0.941, 0, 'o', color='C1', markersize=8, label='Magnetic axis position')
+# plt.plot(0.967, 0, 'o', color='C0', markersize=8, label='Magnetic axis position')
+# # plt.xlim(0.75,1.35)
+# plt.legend()
+# plt.show()

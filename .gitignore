@@ -13,3 +13,5 @@
 *.h
 .idea/
 .nfs*
+runs/
+coll_optics/*

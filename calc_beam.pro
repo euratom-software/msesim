@@ -156,8 +156,11 @@ Bdens = (Bdensc*w0)/(w) * exp(-d^2/w^2)
 
 ; the electron density at pos:
 ; calculate the equilibrium to find the psi
-equi  = calc_equi(pos,R0,a,shafr,elong,Bphi,q0,qwall,qindex,Bp0,Bpa,Bpindex)
+;equi  = calc_equi(pos,R0,a,shafr,elong,Bphi,q0,qwall,qindex,Bp0,Bpa,Bpindex)
+
+equi = read_equi(pos, equifile)
 psi   = equi.psi
+
 ; get the electron density (parabolic density profile assumed)
 edens = edens0*(1-psi^2)
 
