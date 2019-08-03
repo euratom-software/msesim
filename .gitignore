@@ -13,3 +13,4 @@
 *.h
 .idea/
 .nfs*
+runs/

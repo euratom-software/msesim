@@ -1,6 +1,7 @@
 import idlbridge as idl
 import numpy as np
 import xarray as xr
+import matplotlib.pyplot as plt
 
 def create_channel_dataset():
 
@@ -51,7 +52,7 @@ def create_channel_dataset():
                                 doppler_shift, stark_shift,
                                 alpha_central, psi_central])
 
-    return channel_dataset.assign_coords(xyz=['x', 'y', 'z'], channel=np.arange(24))
+    return channel_dataset.assign_coords(xyz=['x', 'y', 'z'], channel=np.arange(40))
 
 
 def create_grid_dataset():
@@ -84,7 +85,7 @@ def create_grid_dataset():
                            gp_bfld, gp_efld, gp_alpha,
                            gp_psi, gp_emis])
 
-    return gp_dataset.assign_coords(xyz=['x', 'y', 'z'], channel=np.arange(24))
+    return gp_dataset.assign_coords(xyz=['x', 'y', 'z'], channel=np.arange(40))
 
 def create_stokes_dataset():
 
@@ -92,26 +93,31 @@ def create_stokes_dataset():
     wavelength.attrs = {'units': 'Angstrom', 'long_name': 'Wavelength'}
 
     pi_stokes = xr.DataArray(data=idl.get('pstokes'), dims=('channel', 'stokes', 'wavelength'), name='pi_stokes')
-    pi_stokes.attrs =  {'long_name': 'Stokes Component'}
 
     sigma_stokes = xr.DataArray(data=idl.get('sstokes'), dims=('channel', 'stokes', 'wavelength'), name='sigma_stokes')
-    sigma_stokes.attrs =  {'long_name': 'Stokes Component'}
 
     total_stokes = xr.DataArray(data=idl.get('stokes'), dims=('channel', 'stokes', 'wavelength'), name='total_stokes')
-    total_stokes.attrs =  {'long_name': 'Stokes Component'}
+
+    stokes_dataset = xr.merge([wavelength, pi_stokes, sigma_stokes, total_stokes])
+    stokes_dataset = stokes_dataset.assign_coords(wavelength=wavelength)
 
     #Calculate the polarisation angle from the total stokes vector
 
-    polarisation_angle = 0.5*np.arctan(total_stokes.isel(stokes=2)/total_stokes.isel(stokes=1))
+    polarisation_angle = 0.5*np.arctan(np.sum(total_stokes.isel(stokes=2),axis=1)/np.sum(total_stokes.isel(stokes=1),axis=1))
+
+    plt.figure()
+    plt.plot(polarisation_angle*180./np.pi)
+    plt.show()
 
     sigma_polarised = (sigma_stokes.isel(stokes=1)**2 + sigma_stokes.isel(stokes=2)**2)**0.5
+
     pi_polarised = (pi_stokes.isel(stokes=1)**2 + pi_stokes.isel(stokes=2)**2)**0.5
 
-    stokes_dataset = xr.merge([wavelength, pi_stokes, sigma_stokes, total_stokes, sigma_polarised, pi_polarised, polarisation_angle])
+    gamma_dataset = xr.merge([wavelength, polarisation_angle, sigma_polarised, pi_polarised])
 
-    stokes_dataset = stokes_dataset.assign_coords(wavelength=wavelength)
+    gamma_dataset = gamma_dataset.assign_coords(channel=np.arange(40), wavelength=wavelength)
 
-    return stokes_dataset
+    return stokes_dataset, gamma_dataset
 
 def create_cwl_stokes_dataset():
 
@@ -168,8 +174,99 @@ def create_datasets(fname):
     idl.execute("restore, '{0}' , /VERBOSE".format(fname))
     channel_ds = create_channel_dataset()
     grid_ds = create_grid_dataset()
-    stokes_ds, cwl_stokes_ds = create_stokes_dataset()
+    stokes_dataset, gamma_dataset = create_stokes_dataset()
     emission_ds, res_ds = create_resolution_dataset()
 
-    return channel_ds, grid_ds, stokes_ds, cwl_stokes_ds, res_ds, emission_ds
+    return channel_ds, grid_ds, stokes_dataset, gamma_dataset, res_ds, emission_ds
+
+
+def spectrum(fname, channel, title):
+    channel_ds, grid_ds, stokes_ds, gamma_ds, res_ds, emission_ds = create_datasets(fname)
+    try:
+        stokes_ds['total_stokes'].isel(stokes=0, channel=channel).plot(label='R={}m, {}'.format(np.round(res_ds['r_resolution'].isel(channel=channel, nr=2).values,3), title))
+        # stokes_ds['total_stokes'].isel(stokes=1, channel=channel).plot(label='S1')
+        # stokes_ds['total_stokes'].isel(stokes=2, channel=channel).plot(label='S2')
+        # stokes_ds['total_stokes'].isel(stokes=3, channel=channel).plot(label='S3')
+        plt.ylabel('Intensity [ph/s]', fontsize=18)
+        plt.xlabel('Wavelength [Angstrom]', fontsize=18)
+        plt.legend(loc=2, prop={'size': 12})
+        plt.title('{}'.format(title))
+        #plt.xlim(6598,6602.5)
+        #plt.ylim(-4500,8500)
+        # plt.show()
+    except IndexError:
+        print('Channel number must be between 0 and 40!')
+
+def create_gamma_dataset():
+
+    wavelength = xr.DataArray(data=idl.get('lambda'), dims=('wavelength'), name='lambda')
+    wavelength.attrs = {'units': 'Angstrom', 'long_name': 'Wavelength'}
+
+    r_resolution = xr.DataArray(data=idl.get('r_res'), dims=('channel', 'nr'), name='r_resolution')
+    r_resolution.attrs = {'units': 'm', 'long_name': 'Spatial resolution'}
+
+    r_coords = r_resolution.isel(nr=2)
+
+    r_coords = xr.DataArray(data=r_coords, name='r_coords')
+
+    #Calculate the polarisation angle from the total stokes vector
+    total_stokes = xr.DataArray(data=idl.get('stokes'), dims=('channel', 'stokes', 'wavelength'), name='total_stokes')
+
+    polarisation_angle = -1*0.5*np.arctan(np.sum(total_stokes.isel(stokes=2),axis=1)/np.sum(total_stokes.isel(stokes=1),axis=1))*180./np.pi
+
+    polarisation_angle = xr.DataArray(data=polarisation_angle, dims=('channel'), name='gamma')
+
+    gamma_dataset = xr.merge([wavelength, polarisation_angle, r_coords])
+
+    gamma_dataset = gamma_dataset.assign_coords(channel=np.arange(40))
+
+    return gamma_dataset
+
+
+def create_dataset(fname):
+
+    idl.execute("restore, '{0}' , /VERBOSE".format(fname))
+    gamma_dataset = create_gamma_dataset()
+
+    return gamma_dataset
+
+mastu_1ma = '/work/sgibson/msesim/runs/conventional_mse_mastu_fiesta1MA/output/data/conventional_mse_mastu.dat'
+jet = '/work/sgibson/msesim/runs/JET/KS5_test/output/data/KS5_87123.dat'
+
+mast = '/work/sgibson/msesim/runs/conventional_mse_mast/output/data/MAST_27193_0.2_lpmse.dat'
+mast_deltabeam = '/work/sgibson/msesim/runs/mse_mast_test/output/data/MAST_27193_0.2_lpmse.dat'
+
+mastu_k25 = '/work/sgibson/msesim/runs/conventional_mse_mastu_K25_scenario/output/data/conventional_mse_mastu_k25_scenario.dat'
+mastu_mastlike = '/work/sgibson/msesim/runs/conventional_mse_mastu_mastlike/output/data/conventional_mse_mastu.dat'
+
+test = '/work/sgibson/msesim/runs/mse_mast_test/output/data/MAST_27193_0.2_lpmse.dat'
+
+ds_1ma = create_dataset(mastu_1ma)
+plt.plot(ds_1ma['r_coords'], ds_1ma['gamma'], color='C0', label='Ip = 1MA, MAST-U plasma, 3-4 beam')
+
+ds_k25 = create_dataset(mastu_k25)
+plt.plot(ds_k25['r_coords'], ds_k25['gamma'], color='C1', label='Ip = 1MA, MAST-U plasma, 2 beam')
+
+ds_mastlike = create_dataset(mastu_mastlike)
+plt.plot(ds_mastlike['r_coords'], ds_mastlike['gamma'], color='C2', label='Mast-like plasma')
+
+plt.ylabel('Polarisation Angle (Degrees)', fontsize=28)
+plt.xlabel('R (m)', fontsize=28)
+plt.legend(loc=2, prop={'size': 20})
+plt.show()
+
+
+
+
+
+# spectrum(mastu_1ma, channel=10, title='MAST-U 1MA')
+
+#spectrum(test, channel=20, title='test tiny beam width')
+# spectrum(mastu_mastlike, channel=20, title='MAST-like plasma, 65kV beam')
+# spectrum(mastu_k25, channel=20, title='MAST-U plasma, 70kV beam')
+# spectrum(mastu_1ma, channel=20, title='MAST-U 1MA plasma, 75kV beam')
+# # plt.show()
+#
+# channel_ds, grid_ds, stokes_dataset, gamma_dataset, res_ds, emission_ds = create_datasets(mastu_1ma)
+
 

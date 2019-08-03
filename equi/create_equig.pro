@@ -87,7 +87,7 @@ shot = strmid(gfile,3,4)
 time = strmid(gfile,10,4)
 
 ; save this into the given file
-save, R,Z,Bfld,fluxcoord,Rm, filename=maindir+sep+'equi'+sep+'equi_K'+shot+'_'+time+fluxoldflag+'.sav'
+save, R,Z,Bfld,fluxcoord,Rm, filename='/work/sgibson/msesim/equi/conventional_mastu_mastlike.sav'
 
 
 end

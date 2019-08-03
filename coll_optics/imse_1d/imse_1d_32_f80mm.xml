@@ -1,0 +1,91 @@
+<?xml version="1.0" ?>
+<stark_settings description="Input parameters for the IDL STARK code">
+   
+  
+   <coll description="Data relevant to the Collection optics">
+      
+    
+      <xyz description="The xyz-coordinates - in the machine coordinate system - of the collection lens." type="float" unit="m" value="-0.949, -2.228,  0.000"/>
+      
+    
+      <k description="The xyz-coordinates - in the machine coordinate system - of the k-vector of the collection lens.       This is the vector describing the optical axis and in the direction from the emission volume towards the       collection lens. REMARK: the collection lens coordinate system is given by: (k,l,m), with k the unit vector       given here, l=zxk/|zxk| - z being the z of the machine coordinate system - and m=kxl. This means that       k-coordinates are along the optical axis, l coordinates are horizontal and m-coordinates are - usually -       more or less vertical (if the optical axis is more or less horizontal)." type="float" value="-0.750, -0.662,  0.000"/>
+      
+    
+      <d description="The diameter of the collection lens." type="float" unit="mm" value="38.00"/>
+      
+    
+      <efl description="Effective focal length of the collection lens (This is linked with the alpha - the opening angle       that corresponds with 1 mm on the fibre plate - through: efl = 1/tan(alpha) )." type="float" unit="mm" value="72.98"/>
+      
+    
+      <fibre description="Diameter of the optical core of the fibre and the diameter of the total fibre." type="float" unit="micrometer" value="   20, 20"/>
+      
+  
+      <bundleID description="" type="string" value="p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20, p21, p22, p23, p24, p25, p26, p27, p28, p29, p30, p31"/>
+      <p0l description="" type="str" value="-10.24"/>
+      <p0m description="" type="str" value="0.0"/>
+      <p1l description="" type="str" value="-9.57935483871"/>
+      <p1m description="" type="str" value="0.0"/>
+      <p2l description="" type="str" value="-8.91870967742"/>
+      <p2m description="" type="str" value="0.0"/>
+      <p3l description="" type="str" value="-8.25806451613"/>
+      <p3m description="" type="str" value="0.0"/>
+      <p4l description="" type="str" value="-7.59741935484"/>
+      <p4m description="" type="str" value="0.0"/>
+      <p5l description="" type="str" value="-6.93677419355"/>
+      <p5m description="" type="str" value="0.0"/>
+      <p6l description="" type="str" value="-6.27612903226"/>
+      <p6m description="" type="str" value="0.0"/>
+      <p7l description="" type="str" value="-5.61548387097"/>
+      <p7m description="" type="str" value="0.0"/>
+      <p8l description="" type="str" value="-4.95483870968"/>
+      <p8m description="" type="str" value="0.0"/>
+      <p9l description="" type="str" value="-4.29419354839"/>
+      <p9m description="" type="str" value="0.0"/>
+      <p10l description="" type="str" value="-3.6335483871"/>
+      <p10m description="" type="str" value="0.0"/>
+      <p11l description="" type="str" value="-2.97290322581"/>
+      <p11m description="" type="str" value="0.0"/>
+      <p12l description="" type="str" value="-2.31225806452"/>
+      <p12m description="" type="str" value="0.0"/>
+      <p13l description="" type="str" value="-1.65161290323"/>
+      <p13m description="" type="str" value="0.0"/>
+      <p14l description="" type="str" value="-0.990967741935"/>
+      <p14m description="" type="str" value="0.0"/>
+      <p15l description="" type="str" value="-0.330322580645"/>
+      <p15m description="" type="str" value="0.0"/>
+      <p16l description="" type="str" value="0.330322580645"/>
+      <p16m description="" type="str" value="0.0"/>
+      <p17l description="" type="str" value="0.990967741935"/>
+      <p17m description="" type="str" value="0.0"/>
+      <p18l description="" type="str" value="1.65161290323"/>
+      <p18m description="" type="str" value="0.0"/>
+      <p19l description="" type="str" value="2.31225806452"/>
+      <p19m description="" type="str" value="0.0"/>
+      <p20l description="" type="str" value="2.97290322581"/>
+      <p20m description="" type="str" value="0.0"/>
+      <p21l description="" type="str" value="3.6335483871"/>
+      <p21m description="" type="str" value="0.0"/>
+      <p22l description="" type="str" value="4.29419354839"/>
+      <p22m description="" type="str" value="0.0"/>
+      <p23l description="" type="str" value="4.95483870968"/>
+      <p23m description="" type="str" value="0.0"/>
+      <p24l description="" type="str" value="5.61548387097"/>
+      <p24m description="" type="str" value="0.0"/>
+      <p25l description="" type="str" value="6.27612903226"/>
+      <p25m description="" type="str" value="0.0"/>
+      <p26l description="" type="str" value="6.93677419355"/>
+      <p26m description="" type="str" value="0.0"/>
+      <p27l description="" type="str" value="7.59741935484"/>
+      <p27m description="" type="str" value="0.0"/>
+      <p28l description="" type="str" value="8.25806451613"/>
+      <p28m description="" type="str" value="0.0"/>
+      <p29l description="" type="str" value="8.91870967742"/>
+      <p29m description="" type="str" value="0.0"/>
+      <p30l description="" type="str" value="9.57935483871"/>
+      <p30m description="" type="str" value="0.0"/>
+      <p31l description="" type="str" value="10.24"/>
+      <p31m description="" type="str" value="0.0"/>
+   </coll>
+   
+
+</stark_settings>

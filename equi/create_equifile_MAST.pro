@@ -23,8 +23,6 @@ endif
 ; Read in the data
 data = read_flux(shotno,/nofc) ; only works on MAST
 
-stop
-
 ; get the index of the time we're interested in
 mnt = min(abs(data.taxis.vector-time), tidx)
 

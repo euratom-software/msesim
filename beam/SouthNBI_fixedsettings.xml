@@ -28,7 +28,7 @@
 		  description="Half 1/e width of the divergence of the beamlets."
 		  unit="degrees"
 		  type="float"
-		  value="0.7"/>
+		  value="0.5"/>
 		<w
 		  description="The half sampling width of the beam. This means that the maximum distance from the integration points to the beam axis is w. In case no beam-file is defined, w is also the full 1/e -width of the calculated Gaussian beam profile."
 		  unit="m"

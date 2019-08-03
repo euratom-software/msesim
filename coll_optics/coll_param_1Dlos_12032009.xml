@@ -26,10 +26,10 @@
       type="float"
       value="72.98"/>
     <fibre
-      description="Diameter of the optical core of the fibre and the diameter of the total fibre. (for etendue)"
+      description="Diameter of the optical core of the fibre and the diameter of the total fibre. (for etendue) 1740, 710"
       unit="micrometer"
       type="float"
-      value="1740,   710"/>
+      value="400, 430"/>
     <bundleID
       description="The IDs of each fibre bundle. E.g. for MAST the MSE fibre bundles are named: MD142, MD142, ...,
       MD181. REMARK: The xml-nodes further down in this file describing l- and m-coordinates of the fibres in each
