@@ -158,6 +158,13 @@ Bdens = (Bdensc*w0)/(w) * exp(-d^2/w^2)
 ; calculate the equilibrium to find the psi
 ;equi  = calc_equi(pos,R0,a,shafr,elong,Bphi,q0,qwall,qindex,Bp0,Bpa,Bpindex)
 
+if strcmp('none',equifile,/fold_case) then begin
+equi = calc_equi(pos,$
+                 R0,a,sharf,elong,$
+                 Bphi, q0, qwall,qindex,$
+                 Bp0, Bpa, Bpindex)
+end if else begin
+
 equi = read_equi(pos, equifile)
 psi   = equi.psi
 
