@@ -92,7 +92,7 @@ if ~oldbeam then begin
     idx = where(dp lt -1.0,count)	; can happen due to round-off error
     if count ne 0 then dp[idx]=-1.0
     xi  = acos(dp)
-    print,xi[0]
+    ;print,xi[0]
     ; get the propability
     p   = exp(-xi^2/div^2)
     p   = p/total(p)
@@ -199,7 +199,7 @@ endif else begin
 
     ; put all data in the structure
     structarr[k].avvel = avvel[*,k]
-    print, 'average velocity distribution', avvel[*,k]
+    ;print, 'average velocity distribution', avvel[*,k]
     structarr[k].vel   = vel
     structarr[k].p     = p
   endfor
