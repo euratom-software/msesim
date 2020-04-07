@@ -163,7 +163,7 @@ equi = calc_equi(pos,$
                  R0,a,sharf,elong,$
                  Bphi, q0, qwall,qindex,$
                  Bp0, Bpa, Bpindex)
-end if else begin
+endif else begin
 equi = read_equi(pos, equifile)
 endelse
 psi   = equi.psi
