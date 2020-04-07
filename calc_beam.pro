@@ -164,8 +164,8 @@ equi = calc_equi(pos,$
                  Bphi, q0, qwall,qindex,$
                  Bp0, Bpa, Bpindex)
 end if else begin
-
 equi = read_equi(pos, equifile)
+endelse
 psi   = equi.psi
 
 ; get the electron density (parabolic density profile assumed)
