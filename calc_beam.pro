@@ -70,7 +70,11 @@ function calc_beam, pos,B0,Bv,chi,w0,Bdens0,edens0,Qion,Qemit,$
 ;   where k is the distance to the beam port B0
 ;
 ; - the emission rate is taken to be 2e13 (in the same order as what M. Turnyanskiy predicts)
-
+; S. Gibson 04/2020 - Noticed a bug with the beam emission ~ 6 orders
+;                    of magnitude smaller than that from the beam file.
+;             I think the units of the emission rate specified here
+;             is photons/cm^3/s. If this is the case then we need the
+;             same conversion to photons/m^3/s ie. emission*1e6.
 
 ; Numerical integration setting:
 nl = 100    ; number of numerical integration points
@@ -134,7 +138,7 @@ if (count ne 0) then begin
                     Bphi,q0,qwall,qindex,$
                     Bp0,Bpa,Bpindex)
   endif else begin
-    equi  = read_equi(Bpt, equifile)		; else: get the equilibrium from the file
+  equi  = read_equi(Bpt, equifile)		; else: get the equilibrium from the file
   endelse
   psi   = equi.psi
 
@@ -178,8 +182,8 @@ Bdenstmp = Bdens*1e-12
 edenstmp = edens*1e-12
 Qemittmp = Qemit*1e20
 emission = Bdenstmp * edenstmp * Qemittmp
-
 ; make the structure and return it
+emission = emission * 1e6 ;m^-3
 beam ={Bdens:Bdens, edens:edens, emission:emission}
 return, beam
 
