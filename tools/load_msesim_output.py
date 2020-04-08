@@ -8,6 +8,9 @@ import matplotlib.gridspec as gridspec
 
 import pyuda
 
+from os.path import expanduser
+
+
 client = pyuda.Client()
 
 plt.ion()
@@ -142,3 +145,10 @@ class MSESIM(object):
         plt.ylabel('Intensity $I$ (photons/s)', labelpad=5)
 
         plt.show()
+
+#How to use
+#path_sim = expanduser("FILEPATH_TO_RUN/MAST_28101_t200ms_filtered.dat") #Directory of msesim output                                                                                                                                                                              
+#idl.execute("restore, '{0}' , /VERBOSE".format(path_sim))
+
+#msesim = MSESIM()
+#msesim.plot_spectrum(radius=1.0)
