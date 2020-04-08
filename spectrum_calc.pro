@@ -122,7 +122,6 @@ print,FORMAT='($,A)',"................................... "
 ;----------------------------------------------------------------------------------
 common physics, c, kb, em, e, pm, nm, RydInf
 
-;fname = ['/home/sgibson/PycharmProjects/msesim/equi/physics/','physic_constants.xml']
 info = routine_info('msesim', /SOURCE)
 msesimRootDir = file_dirname(info.path)
 

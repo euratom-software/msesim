@@ -19,8 +19,8 @@
 
 pro test_beam, calc=calc
 ; tokamak and field parameters
-R0    = 0.83
-a     = 0.60
+R0    = 0.88 ;0.83 for MAST 
+a     = 0.65 ;0.6 for MAST
 Bphi  = -0.5
 q0    = 1.0
 qa    = 3.0
@@ -34,9 +34,9 @@ elong = 1.66
 ; beam parameters
 B0   =[0,-2,0]
 w0   =0.1
-xi   =70
-delta=90
-chi  =1.2
+xi   = 70
+delta= 90
+chi  = 1.2
 
 Bdens0=5e15
 edens0=5e19
