@@ -1,31 +1,41 @@
 import idlbridge as idl
 import numpy as np
 
+from scipy.io import readsav
+
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 
+import pyuda
+
+client = pyuda.Client()
+
+plt.ion()
+
 class MSESIM(object):
 
-    def __init__(self, n_fibers):
+    def __init__(self):
 
-        #load in commonly used parameters from the msesim file... everything else is stored in the data array.
-        self.object_names = ('central_coordinates', 'beam_velocity_vector', 'beam_duct_coordinates', 'half_beam_sampling_width', 'beam_axis_vector',
-                            'collection_lens_coordinates', 'optical_axis', 'emission_vector', 'bfield_vector', 'efield_vector',
-                            'doppler_shift', 'max_stark_shift', 'polarisation_angles', 'psi_normalised',
+        self.object_names = (
+                'intersection_coordinates', 'beam_velocity', 'beam_duct_coordinates', 'half_beam_sampling_width',
+                'beam_axis_vector',
+                'collection_lens_coordinates', 'optical_axis', 'emission_vector', 'bfield_vector', 'efield_vector',
+                'doppler_shift', 'max_stark_shift', 'polarisation_angles', 'psi_at_intersection_coordinates',
 
-                            'grid_coordinates', 'beam_velocity_vector', 'emission_vector',
-                            'bfield_vector', 'efield_vector', 'polarisation_angles',
-                            'psi_normalised', 'emission_intensity',
+                'grid_coordinates', 'grid_beam_velocity_vectors', 'grid_emission_vectors',
+                'grid_bfield_vector', 'grid_efield_vector', 'grid_polarisation_angles',
 
-                            'R', 'Z', 'psi', 'psi(R,Z)', 'magnetic_axis',
-                            'emission_intensity(RZ)', 'emission_intensity(R)', 'emission_intensity(psi)',
-                            'resolution_vector(psi)', 'resolution_vector(R)',
+                'grid_psi_normalised', 'grid_beam_emission_intensity',
 
-                            'wavelength_vector', 'pi_stokes', 'sigma_stokes', 'total_stokes',
-                            'cwl_stokes', 'optimal_sigma_wavelength_stokes', 'optimal_blueshift_pi_wavelength',
-                            'optimal_redshift_pi_wavelength')
+                'R', 'Z', 'psi', 'psi(R,Z)', 'magnetic_axis',
 
-        self.nx = n_fibers
+                'emission_intensity(RZ)', 'emission_intensity(R)', 'emission_intensity(psi)',
+                'radial_resolution(psi)', 'radial_resolution(R)',
+
+                'wavelength_vector', 'pi_stokes', 'sigma_stokes', 'total_stokes',
+                'cwl_stokes', 'optimal_sigma_wavelength_stokes', 'optimal_blueshift_pi_wavelength_stokes',
+                'optimal_redshift_pi_wavelength_stokes')
+
         self.data = self.load_msesim_spectrum()
         self.parameters_1d()
 
@@ -75,21 +85,30 @@ class MSESIM(object):
 
     def parameters_1d(self):
 
-        self.stokes_total = np.array(self.data["total_stokes"])
+        """
+        Calculate useful parameters using the Stokes vectors, including:
 
-        print(self.stokes_total.shape)
+        - Polarised Fraction
+        - Total Unpolarised Fraction
+        - Linearly polarised fraction
+        - Circularly polarised fraction
+        - Polarisation angle at the central wavelengths
 
-        self.S0 = self.stokes_total[:,0,:]
-        self.S1 = self.stokes_total[:,1,:]
-        self.S2 = self.stokes_total[:,2,:]
-        self.S3 = self.stokes_total[:,3,:]
+        :return:
+        """
 
-        # self.cwl = self.stokes_total[:,4]
+        self.stokes_total = np.array(self.data["cwl_stokes"])
+
+        self.S0 = self.stokes_total[:,0]
+        self.S1 = self.stokes_total[:,1]
+        self.S2 = self.stokes_total[:,2]
+        self.S3 = self.stokes_total[:,3]
+        self.cwl = self.stokes_total[:,4]
 
         self.wavelength = np.array(self.data["wavelength_vector"])/10 #in nanometers
 
         self.major_radius = np.array(self.data["resolution_vector(R)"])[:,2]
-        #self.major_radius = self.major_radius[::-1]
+
 
         self.polarised_fraction = np.sqrt(self.S1**2 + self.S2**2+self.S3**2)/self.S0
         self.total_unpolarised = (self.S0 - np.sqrt(self.S1**2 + self.S2**2 + self.S3**2))/self.S0
@@ -100,14 +119,12 @@ class MSESIM(object):
 
         self.circular_total = np.sqrt(self.S3**2)/self.S0 #total circular polarisation fraction
 
-        self.gamma = 0.5*np.arctan2(self.S2,self.S1)*(180./np.pi) #polarisation angle
+        self.gamma = -0.5*np.arctan2(self.S2,self.S1)*(180./np.pi) #polarisation angle
 
     def plot_spectrum(self, radius):
 
         # Find the radii for the spectrum you want to plot
         idx = self._find_nearest(self.major_radius, value=radius)
-
-        print(idx)
 
         #manager = plt.get_current_fig_manager()
         #manager.window.showMaximized()
@@ -124,60 +141,4 @@ class MSESIM(object):
         plt.xlabel('Wavelength (nm)')
         plt.ylabel('Intensity $I$ (photons/s)', labelpad=5)
 
-        #inset graph!
-        # left, bottom, width, height = [0.5, 0.65, 0.2, 0.2]
-        # ax2 = fig.add_axes([left, bottom, width, height])
-        # ax2.plot(self.wavelength, self.circular_total[idx,idx,:].T*100, label='Circular fraction')
-        # plt.xlabel('Fraction of circularly polarised light (%)')
-
-        # ax2 = fig.add_subplot(gs1[-1, :-1])
-        # plt.plot(self.wavelength, self.gamma[idx,:].T, label='$\gamma$')
-        # plt.yticks(np.arange(-45., 46, 45))
-        # plt.xlabel('Wavelength (nm)')
-        # plt.ylabel('Polarisation angle $\gamma$ (deg.)')
-        #
-        # ax3 = fig.add_subplot(gs1[-1, -1])
-        # ax3.plot(self.wavelength, self.circular_total[idx, :].T, label='$CPF$')
-        # ax3.plot(self.wavelength, self.total_unpolarised[idx,:].T, color='black', label='$UF$')
-        # plt.yticks(np.arange(0, 1, 0.2))
-        # ax3.yaxis.tick_right()
-        # ax3.yaxis.set_label_position("right")
-        # ax3.legend(prop={'size': 18})
-        # plt.ylabel('Polarised Fraction', labelpad=10)
-        # plt.xlabel('Wavelength (nm)')
-
         plt.show()
-
-
-idl.execute("restore, '/work/sgibson/msesim/runs/test/output/data/test_settings.dat, /VERBOSE")
-
-msesim = MSESIM(n_fibers=40)
-msesim.plot_spectrum(radius=1.0)
-
-
-# #Example
-# idl.execute("restore, '/work/sgibson/msesim/runs/conventional_mse_mastu_fiesta1MA/output/data/conventional_mse_mastu.dat', /VERBOSE")
-# fiesta = MSESIM(n_fibers=40)
-
-# fiesta_r = fiesta.major_radius
-# fiesta_gamma = fiesta.gamma
-#
-# plt.figure()
-# plt.plot(fiesta_r[::-1], -1*fiesta_gamma, color='C0', label='fiesta 1MA')
-#
-# idl.execute("restore, '/work/sgibson/msesim/runs/conventional_mse_mastu_K25_scenario/output/data/conventional_mse_mastu_k25_scenario.dat', /VERBOSE")
-# k25 = MSESIM(n_fibers=40)
-#
-# k25_r = k25.major_radius
-# k25_gamma = k25.gamma
-#
-# plt.plot(k25_r[::-1], -1*k25_gamma, color='C1', label='k25')
-# plt.xlabel('Major radius R (m)')
-# plt.ylabel('Polarisation Angle (Degrees)')
-#
-# plt.axvline(x=1.34, linestyle='--', color='black')
-# plt.plot(0.941, 0, 'o', color='C1', markersize=8, label='Magnetic axis position')
-# plt.plot(0.967, 0, 'o', color='C0', markersize=8, label='Magnetic axis position')
-# # plt.xlim(0.75,1.35)
-# plt.legend()
-# plt.show()
