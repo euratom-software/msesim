@@ -66,6 +66,6 @@ emission = interpolate(ratebes2,xi,yi,zi)
 emission = 1e6*emission
 
 beam ={Bdens:Bdens, edens:edens, emission:emission}
-return, beam
 
+return, beam
 end
