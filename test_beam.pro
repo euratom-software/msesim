@@ -19,8 +19,8 @@
 
 pro test_beam, calc=calc
 ; tokamak and field parameters
-R0    = 0.88 ;0.83 for MAST 
-a     = 0.65 ;0.6 for MAST
+R0    = 0.8 ;0.88 ;0.83 for MAST 
+a     = 0.6 ;0.65 ;0.6 for MAST
 Bphi  = -0.5
 q0    = 1.0
 qa    = 3.0
@@ -32,18 +32,19 @@ shafr = 0.1
 elong = 1.66
 
 ; beam parameters
-B0   =[0,-2,0]
-w0   =0.1
-xi   = 70
+;B0   =[0,-2,0]
+B0 = [0.539, -1.926, 0.0]
+w0   = 0.1
+xi   = 85.16 ;70
 delta= 90
 chi  = 1.2
 
 Bdens0=5e15
-edens0=5e19
+edens0= 3e19 ;5e19
 Qion  =5e-20
 Qemit =2.5e-12
 
-Brange =[0.4,1.90]
+Brange =[0,1.90] ;was 0.4
 nl     = 20
 nw     = 20
 ntheta = 18
@@ -53,7 +54,8 @@ dw     = (3*w0)/(nw-1)
 dtheta = 2*!pi/ntheta
 
 ;beamfile = 'beam/9168swbes60kevpini.xdr'
-beamfile = 'beam/beam_bes_PINI_S_18501_t0.29s_63keV.xdr'
+;beamfile = 'beam/beam_bes_PINI_S_18501_t0.29s_63keV.xdr'
+
 readbeam = not(keyword_set(calc))
 
 ; degrees to radians
@@ -77,24 +79,30 @@ for k=0,ntheta-1 do begin
 
    Bwv = coordtrans([0,w*cos(theta),w*sin(theta)],[[0,0,0],[X2]])
    Bpt[*,m] = B0 + l*Bv + Bwv
-
    m++
 endfor
 endfor
 endfor
 
-if readbeam then begin
-   beam = read_beam(Bpt,Bv,beamfile)
-endif else begin
-   beam = calc_beam(Bpt, B0,Bv,d2r*chi,w0,$
-                    Bdens0,edens0,Qion,Qemit,$
-                    R0, a, shafr, elong,$
-                    Bphi,q0,qa,qidx,Bp0,Bpa,Bpidx)
-endelse
+;if readbeam then begin
+;   beam = read_beam(Bpt,Bv,beamfile)
+;endif else begin
+equifile = 'equi/equi_MASTU_k25_scenario_centre.sav'
+beam = calc_beam(Bpt, B0,Bv,d2r*chi,w0,$
+                 Bdens0,edens0,Qion,Qemit,$
+                 equifile, R0, a, shafr, elong,$
+                 Bphi,q0,qa,qidx,Bp0,Bpa,Bpidx)
+;endelse
+
 ; Beam density, electron density and emission rate as function of Bpt:
 Bdens = beam.Bdens
 edens = beam.edens
 Qemit = beam.emission
+
+save, bdens, filename='bdens_bpt.sav'
+save, edens, filename='edens_bpt.sav'
+save, Qemit, filename='Qemit_bpt.sav'
+
 ; The same as function of length along, distance from and angle around the beam axis
 Bdens3 =fltarr(nl,nw,ntheta)
 edens3 =fltarr(nl,nw,ntheta)
@@ -111,7 +119,10 @@ endfor
 endfor
 endfor
 
-
+save, Bpt, filename='Beam_pos.sav'
+save, Bdens3, filename='bdens.sav'
+save, edens3, filename='edens.sav'
+save, Qemit3, filename='qemit.sav'
 ; Beam density plot
 ;------------------
 ; plot the geometry
@@ -149,6 +160,7 @@ endfor
   d2 = findgen(2*nw-1)*dw - (nw-1)*dw
   lddens =fltarr(nl,2*nw-1)
   idxpi =ntheta/2
+  print, idxpi
   lddens[0:nl-1,0:nw-1]    = rotate(Bdens3[*,*,idxpi[0]],7)
   lddens[0:nl-1,nw:2*nw-2] = Bdens3[*,1:*,0]
   surface, lddens ,l, d2, color=0,charsize=2.0, charthick=1.2,$

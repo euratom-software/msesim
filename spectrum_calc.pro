@@ -124,8 +124,10 @@ common physics, c, kb, em, e, pm, nm, RydInf
 
 info = routine_info('msesim', /SOURCE)
 msesimRootDir = file_dirname(info.path)
+print, 'MSESIM ROOT DIR....'
+print, msesimRootDir
 
-fname = [msesimRootDir+'/equi/physics/','physic_constants.xml']
+fname = [msesimRootDir, '/equi/physics/physic_constants.xml']
 
 physics  = readxml(fname)
 c        = physics.c		; light speed (m/s)
@@ -449,7 +451,10 @@ endfor
 ; hence the etendue of 1 fibre is:
 etendue = ( (C_fibre[0] * C_w * !pi)/(2.0*C_efl) )^2 
 
-
+;etendue for a pixel is Apix * solid angle -> C_fibre[0]^2 * pi *
+;(efl/2*lens radius)^2
+;etendue = (C_fibre[0]^2)*!pi*(C_w^2)/(C_efl^2)
+print,'ETENDUE IS....', etendue
 ;----------------------------------------------------------------------------------
 ; Calculate the points on the collection lens that collect the emitted light
 ; and over which we will integrate
@@ -869,7 +874,7 @@ for k=0,nchan-1 do begin
   endelse
   ; psi of the grid point
   gp_psi[0:gp_n-1,k]    = equi.psi
-  ; the B-field at position gp is:
+; the B-field at position gp is:
   gp_Bfld[*,0:gp_n-1,k] = equi.Bfld
 
   print,FORMAT='("done!")'
@@ -907,6 +912,7 @@ for k=0,nchan-1 do begin
                      B_vec,$
                      beamfile)
   endelse
+  
   gp_emis[0:gp_n-1,k] = beam.emission/(4.0*!pi) ; the 4*pi converts the total emission/volume element
                                                 ; to the emission/volume element/solid angle
   ; the collected emission is the emission/volume element/solid angle
@@ -1040,7 +1046,6 @@ for k=0,nchan-1 do begin
       for l=0,B_nEf-1 do begin
         ; all information about the Stark E-field is now known:
         Efld    = crossp(B_v[l]*gp_div,gp_Bfld[*,gp_c,k]) + Er[*,gp_c]	; the E-field is v x B + Er
-
         ;----------------------------------------------------------------------------------
         ; Stark strength and energy levels (depend on Efld and Bfld)
         ;----------------------------------------------------------------------------------

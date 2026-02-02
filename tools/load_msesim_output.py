@@ -110,7 +110,7 @@ class MSESIM(object):
 
         self.wavelength = np.array(self.data["wavelength_vector"])/10 #in nanometers
 
-        self.major_radius = np.array(self.data["resolution_vector(R)"])[:,2]
+        self.major_radius = np.array(self.data["radial_resolution(R)"])[:,2]
 
 
         self.polarised_fraction = np.sqrt(self.S1**2 + self.S2**2+self.S3**2)/self.S0
@@ -148,7 +148,14 @@ class MSESIM(object):
 
 #How to use
 #path_sim = expanduser("FILEPATH_TO_RUN/MAST_28101_t200ms_filtered.dat") #Directory of msesim output                                                                                                                                                                              
-#idl.execute("restore, '{0}' , /VERBOSE".format(path_sim))
-
-#msesim = MSESIM()
-#msesim.plot_spectrum(radius=1.0)
+# path_sim = expanduser("/work/sgibson/msesim/runs/DIIID_180162_revbt/output/data/DIIID_1801862_revbt.dat")
+# idl.execute("restore, '{0}' , /VERBOSE".format(path_sim))
+#
+# msesim = MSESIM()
+#
+# gamma_2d = msesim.gamma.reshape(32,32)
+# r_2d = msesim.major_radius.reshape(32,32)
+#
+# plt.figure()
+# plt.plot(r_2d, gamma_2d)
+# plt.show()

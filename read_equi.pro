@@ -52,15 +52,18 @@ n    = n_elements(Rpos)
 ; the interpolation indices (Ri,Zi) for these positions are
 Ri = (Rpos-min(R))/(max(R)-min(R)) * (n_elements(R)-1)
 Zi = (Zpos-min(Z))/(max(Z)-min(Z)) * (n_elements(Z)-1)
-
 ; interpolate the B-field components and the flux coordinates
+
 BR   = reform(interpolate(Bfld[0,*,*],Ri,Zi),1,n)
 BZ   = reform(interpolate(Bfld[1,*,*],Ri,Zi),1,n)
 Bphi = reform(interpolate(Bfld[2,*,*],Ri,Zi),1,n)
-
-psi  = reform(interpolate(transpose(fluxcoord),Ri,Zi),1,n)
+psi  = reform(interpolate(fluxcoord,Zi,Ri),1,n) 
+;was Ri, Zi for non fiesta equilibrium - fluxcoord defined in python
+;                                        on (Ri, Zi) -> switch to IDL
+;                                        (Zi, Ri)
 
 ; create the B-field vector in xyz-coordinates
+
 Bfld = fltarr(3,n)
 phi        = atan(pos[1,*],pos[0,*])					; the toroidal angle of pos
 Bphi_vec   = rebin(Bphi,3,n)  * [-sin(phi),cos(phi),replicate(0.0,1,n)]	; the toroidal field vector

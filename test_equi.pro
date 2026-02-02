@@ -20,7 +20,7 @@
 pro test_equi, calc = calc
 ; tokamak and field parameters
 R0    = 0.83
-a     = 0.60
+a     = 0.50 ;0.6 for MAST
 Bphi  = -0.5
 q0    = 1.0
 qa    = 3.0
@@ -34,8 +34,8 @@ elong = 2.2
 ;equifile= 'equi/equi_16246_t0.25.xdr'
 ;equifile= 'equi/equi_18501_t0.29_TFonly.xdr'
 ;equifile= 'equi/equi_19514_t0.308.xdr'
-equifile= 'equi/equi_19514_t0.192.xdr'
-
+;equifile= 'equi/equi_19514_t0.192.xdr'
+equifile = 'equi/equi_MASTU_k25_scenario_centre.sav'
 ; psi and theta
 npsi   = 7
 ntheta = 33
@@ -146,8 +146,5 @@ plot,[0,1],[0,1],/nodata, xs=1,xr=[0,1],ys=1,yr=[0,1],$
 oplot, psi1, psi2, color=0,psym=1,symsize=2
 
 !p.multi=0
-
-stop
-
 
 end

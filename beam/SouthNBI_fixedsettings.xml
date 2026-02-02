@@ -59,11 +59,13 @@
                   description="Ionisation rate of beam particles per unit of length (only used if the beam file is set to 'none')."
 		  unit="m^2"
 		  type="float"
+                  oldvalue="5e-20"
 		  value="5e-20"/>
 		<Qemit
 		  description="Emission rate of beam particles per s (only used if the beam file is set to 'none')."
 		  unit="photons*m^3/s"
 		  type="float"
-		  value="2.5e-18"/>
+                  oldvalue="2.5e-18"
+		  value="2e-15"/>
 	</beam>
 </stark_settings>

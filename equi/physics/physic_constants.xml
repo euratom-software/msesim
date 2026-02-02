@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<physics description='physics constants'>
 	<c 
 	  description="Speed of light"
 	  unit="m/s"
@@ -58,3 +58,4 @@
 	  unit="(A^2.s^4)/(kg.m^3)"
 	  type="double"
 	  value="8.854187817620e-12"/>
+</physics>
