@@ -115,6 +115,7 @@ for i=0,n_nodes-1 do begin
                   output  = outputAtt->getNodeValue()
                   output  = strtrim(output,2)
                   inputstr= inputAtt->getNodeValue()
+                  stop
                   inputstr= strtrim(strsplit(inputstr,',',/extract),2)
                   input   = ptr_new(inputstr)
                   ; the other fields in the command-structure are empty for the 'filter'-command

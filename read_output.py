@@ -14,7 +14,7 @@ Note: need to execute the restoration of the .dat file containing the data, as s
 """
 
 #Directory of msesim output
-idl.execute("restore, '/home/sgibson/PycharmProjects/msesim/runs/benchmarkMAST/output/data/MAST_28101_t200ms_filtered.dat' , /VERBOSE")
+#idl.execute("restore, '/home/sgibson/PycharmProjects/msesim/runs/benchmarkMAST/output/data/MAST_28101_t200ms_filtered.dat' , /VERBOSE")
 
 class MSESIM_Output(object):
 

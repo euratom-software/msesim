@@ -205,7 +205,6 @@ endif else begin
   endfor
 endelse
 
-
 if doplot then begin
   pseudocol
   !p.background=9
@@ -226,7 +225,7 @@ if doplot then begin
   endfor
 endif
 
-
+save, structarr, filename='beam.sav'
 ; finally return the result
 return, structarr
 

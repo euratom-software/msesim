@@ -12,8 +12,9 @@ plt.ion()
 #efit = equilibrium(gfile="/work/sgibson/msesim/equi/JET_equilibrium/87123/run_87123_EFTM_JETPPF_74/gx087123.49634")
 # efit=equilibrium(device='JET', shot=87123, time=49.634, dda='EFTM', with_bfield=True, verbose=True)
 # efit = equilibrium(gfile="/work/sgibson/msesim/equi/Lowbeta_12.geqdsk")
+# efit = equilibrium(gfile="/work/sgibson/msesim/equi/ECH_MASTU_equilibrium/novel_core_p_and_j.eqdsk")
 
-efit = equilibrium(gfile="/work/sgibson/msesim/equi/novel_core_p_and_j.eqdsk")
+efit = equilibrium(gfile="/work/sgibson/msesim/equi/MASTU_equilibrium/mast_like_20190606.eqdsk")
 
 #Gather the relevant variables that msesim wants
 
@@ -32,6 +33,7 @@ Bfld[:,:,2] = efit.Bt(R,Z)
 #Get normalised magnetic flux co-ordinates and radial co-ordinate of magnetic axis
 
 fluxcoord = efit.psiN(R,Z)
+
 Rm = np.array([efit.axis[0]])
 
 rr,zz = np.meshgrid(R,Z)
@@ -66,13 +68,13 @@ bphi_lvls = np.arange(-6,1,0.05)
 # plt.title('Bphi')
 # plt.contourf(rr,zz,Bfld[:,:,2], levels=bphi_lvls)
 # plt.colorbar()
-#plt.show()
+# plt.show()
 
 #Need to put our variables into idl using the idlbridge:
-# idl.put('R', R)
-# idl.put('Z', Z)
-# idl.put('Bfld', Bfld)
-# idl.put('fluxcoord', fluxcoord.T)
-# idl.put('Rm', Rm)
-#
-# idl.execute("save, R, Z, Bfld, fluxcoord, Rm, filename='equi_MASTU_novel_core_p_and_j.sav'")
+idl.put('R', R)
+idl.put('Z', Z)
+idl.put('Bfld', Bfld)
+idl.put('fluxcoord', fluxcoord)
+idl.put('Rm', Rm)
+
+idl.execute("save, R, Z, Bfld, fluxcoord, Rm, filename='equi_MASTU_mastlike.eqdsk.sav'")

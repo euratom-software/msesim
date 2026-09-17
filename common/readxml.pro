@@ -170,7 +170,7 @@ if ~keyword_set(string) then begin
     return, -1
   endif
   ; load the xml-file
-  oDocument = obj_new('IDLffXMLDOMDocument', filename=file)
+  oDocument = obj_new('IDLffXMLDOMDocument', filename=filesearch[0])
 endif else begin
   ; load the xml-string
   oDocument = obj_new('IDLffXMLDOMDocument', string=file)

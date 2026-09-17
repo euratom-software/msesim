@@ -77,7 +77,7 @@ function calc_beam, pos,B0,Bv,chi,w0,Bdens0,edens0,Qion,Qemit,$
 ;             same conversion to photons/m^3/s ie. emission*1e6.
 
 ; Numerical integration setting:
-nl = 100    ; number of numerical integration points
+nl = 100    ; number of numerical integration points (100)
 
 ; number of pos:
 npos  = n_elements(pos[0,*])
@@ -91,6 +91,7 @@ emission = fltarr(1,npos)
 ; first thing to do is to find out the distance 'd' from pos to the neutral beam axis
 ; and the distance 'k' from B0 to the 'footprint' of pos on the neutral beam axis
 B0pos_v = pos-rebin(B0,3,npos)		; vectors from B0 to pos
+
 d       = sqrt( (Bv[1]*B0pos_v[2,*]-Bv[2]*B0pos_v[1,*])^2$
                +(Bv[0]*B0pos_v[2,*]-Bv[2]*B0pos_v[0,*])^2$
                +(Bv[0]*B0pos_v[1,*]-Bv[1]*B0pos_v[0,*])^2)
@@ -104,21 +105,22 @@ endif
 ; we now try to find the distance m from B0 to the entry point. I.e. where R=R0+a 
 ; <=> (B0[0] + m*Bv[0])^2 + (B0[0] + m*Bv[0])^2 = (R0+a)^2
 ; <=> (Bv[0]^2 + Bv[1]^2)*m^2 + 2*(B0[0]*Bv[0] + B0[1]*Bv[1])*m  + [(B0[0]^2 + B0[1]^2  - (R0+a)^2] = 0
+
 coeff = [B0[0]^2 + B0[1]^2  - (R0+a)^2,$
          2*(B0[0]*Bv[0] + B0[1]*Bv[1]),$
          Bv[0]^2 + Bv[1]^2             ]
 m     = real_part(fz_roots(coeff))
+
 m     = min(m)				; because it's the entry point we're looking for, not the exit point
 ; the distance l between the entry point and the footprint then is:
 l     = k-m
-
 ; if there would be no plasma, then the central beam density would be everywhere the same:
 Bdensc[*] = Bdens0
 
 ; when there is a plasma, we need the integrate over the electron density along the
 ; beam axis. So we should find the largest 'l' (i.e. the point deepest in the plasma)
 ; and find the electron density at 'nl' points in between 0 and 'l'
-idx = where(l gt 0.0, count)
+idx = where(l gt 0, count) ;was 0.1
 if (count ne 0) then begin
   ; all the positive l's and the maximum l
   lpos = l[idx]
@@ -141,20 +143,21 @@ if (count ne 0) then begin
   equi  = read_equi(Bpt, equifile)		; else: get the equilibrium from the file
   endelse
   psi   = equi.psi
-
-  ; and get the integrated electron density at these points (parabolic density profile assumed)
+    ; and get the integrated electron density at these points (parabolic density profile assumed)
   intdens = total(edens0*(1-sqrt(psi)^2),/cumulative)*dl
-
+;  outside_plasma = where(psi GT 1.0)
+;  intdens[outside_plasma] = 1 
   ; the l-bin in which l falls.
   lidx = ceil((lpos-dl)/dl)
-
   ; we now know the beam density at the footprint
+
   Bdensc[idx] =  Bdens0*exp(-Qion*intdens[lidx])
+
 endif
 
 ; next thing is to find out the 1/e width of the beam at the footprint.
 ; that depends on the width at B0 and the beam divergence:
-w = w0+ k*sin(chi)
+w = w0 + k*sin(chi)
 ; the beam density at pos then is:
 Bdens = (Bdensc*w0)/(w) * exp(-d^2/w^2)
 
@@ -163,28 +166,36 @@ Bdens = (Bdensc*w0)/(w) * exp(-d^2/w^2)
 ;equi  = calc_equi(pos,R0,a,shafr,elong,Bphi,q0,qwall,qindex,Bp0,Bpa,Bpindex)
 
 if strcmp('none',equifile,/fold_case) then begin
+print, 'calculating equilibrium within calc_beam....'
 equi = calc_equi(pos,$
                  R0,a,sharf,elong,$
                  Bphi, q0, qwall,qindex,$
                  Bp0, Bpa, Bpindex)
 endif else begin
+
 equi = read_equi(pos, equifile)
 endelse
-psi   = equi.psi
+
+edens_psi   = equi.psi
+;edens_outside_plasma = where(edens_psi GT 1.0)
+;edens_psi[edens_outside_plasma] = 1
 
 ; get the electron density (parabolic density profile assumed)
-edens = edens0*(1-psi^2)
+edens = edens0*(1-edens_psi^2)
 
 ; the last thing is the emission
 ; REMARK: to avoid floating point overflows, we convert Bdens and edens to 1e12 m^(-3), 
 ;         and Qemit to 1e-20 photons*m^3/s/sr
-Bdenstmp = Bdens*1e-12
-edenstmp = edens*1e-12
-Qemittmp = Qemit*1e20
-emission = Bdenstmp * edenstmp * Qemittmp
+;Bdenstmp = Bdens*1e-12
+;edenstmp = edens*1e-12
+;Qemittmp = Qemit*1e20
+;emission = Bdenstmp * edenstmp * Qemittmp
 ; make the structure and return it
-emission = emission * 1e6 ;m^-3
+
+emission = Bdens * edens * Qemit
+
 beam ={Bdens:Bdens, edens:edens, emission:emission}
+
 return, beam
 
 end

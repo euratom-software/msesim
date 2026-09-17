@@ -4,9 +4,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 #file = '/work/sgibson/msesim/equi/MAST_equilibrium/equi_MAST_19522_t0.070.xdr'
-#file = '/work/sgibson/msesim/equi/equi_MASTU_1MA_P4_CATIA.sav'
-#file = '/work/sgibson/msesim/equi/equi_MASTU_k25_scenario_centre.sav'
-file = '/work/sgibson/msesim/equi/equi_MASTU_mastlike.sav'
+file = '/work/sgibson/msesim/tools/equi_MASTU_1MA_P4_CATIA.sav'
+# file = '/work/sgibson/msesim/equi/equi_MASTU_k25_scenario_centre.sav'
+# file = '/work/sgibson/msesim/equi/equi_MASTU_mastlike.sav'
 
 # file = '/work/sgibson/msesim/equi/equi_JET_87123_49.634s_eftm.sav'
 
