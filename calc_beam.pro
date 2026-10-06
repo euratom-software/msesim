@@ -87,6 +87,7 @@ Bdensc   = fltarr(1,npos)	; the central beam density
 edens    = fltarr(1,npos)
 emission = fltarr(1,npos)
 
+Bv = Bv/sqrt(total(Bv^2))    ; d and k below assume a unit vector
 
 ; first thing to do is to find out the distance 'd' from pos to the neutral beam axis
 ; and the distance 'k' from B0 to the 'footprint' of pos on the neutral beam axis
@@ -144,11 +145,10 @@ if (count ne 0) then begin
   endelse
   psi   = equi.psi
     ; and get the integrated electron density at these points (parabolic density profile assumed)
-  intdens = total(edens0*(1-sqrt(psi)^2),/cumulative)*dl
-;  outside_plasma = where(psi GT 1.0)
-;  intdens[outside_plasma] = 1 
+  intdens = total(edens0*(1-((psi>0.0)<1.0)),/cumulative)*dl ; set density outside of psi_n = 1 to be zero
   ; the l-bin in which l falls.
   lidx = ceil((lpos-dl)/dl)
+  lidx = (lidx > 0) < (nl-1)
   ; we now know the beam density at the footprint
 
   Bdensc[idx] =  Bdens0*exp(-Qion*intdens[lidx])
@@ -159,7 +159,7 @@ endif
 ; that depends on the width at B0 and the beam divergence:
 w = w0 + k*sin(chi)
 ; the beam density at pos then is:
-Bdens = (Bdensc*w0)/(w) * exp(-d^2/w^2)
+Bdens = Bdensc * (w0/w)^2 * exp(-d^2/w^2) ; Beam density equation was wrong? (w0/w)^2 scaling rather than (w0/w)
 
 ; the electron density at pos:
 ; calculate the equilibrium to find the psi
@@ -168,7 +168,7 @@ Bdens = (Bdensc*w0)/(w) * exp(-d^2/w^2)
 if strcmp('none',equifile,/fold_case) then begin
 print, 'calculating equilibrium within calc_beam....'
 equi = calc_equi(pos,$
-                 R0,a,sharf,elong,$
+                 R0,a,shafr,elong,$
                  Bphi, q0, qwall,qindex,$
                  Bp0, Bpa, Bpindex)
 endif else begin
@@ -177,11 +177,11 @@ equi = read_equi(pos, equifile)
 endelse
 
 edens_psi   = equi.psi
-;edens_outside_plasma = where(edens_psi GT 1.0)
-;edens_psi[edens_outside_plasma] = 1
+edens_outside_plasma = where(edens_psi GT 1.0)
+edens_psi[edens_outside_plasma] = 1
 
 ; get the electron density (parabolic density profile assumed)
-edens = edens0*(1-edens_psi^2)
+edens = edens0*(1-((edens_psi>0.0)<1.0))
 
 ; the last thing is the emission
 ; REMARK: to avoid floating point overflows, we convert Bdens and edens to 1e12 m^(-3), 
@@ -192,7 +192,7 @@ edens = edens0*(1-edens_psi^2)
 ;emission = Bdenstmp * edenstmp * Qemittmp
 ; make the structure and return it
 
-emission = Bdens * edens * Qemit
+emission = float(double(Bdens) * double(edens) * double(Qemit) * 1d6)    ; Qemit in cm^3 units
 
 beam ={Bdens:Bdens, edens:edens, emission:emission}
 
